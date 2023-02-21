@@ -1,15 +1,27 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation} from "react-router-dom";
 import Navigation from "../components/navigation/navigation";
 
 
 
  const Home = () =>{
+    let location = useLocation();
+    let userName = "Rokie Balvoa";
     return(
-        <div>  
-            <div></div>
-            <Navigation/>
-            <Outlet/>
-        </div>
+        <>            
+        { location.pathname === "/" ? (
+            //aria del login 
+            <>     
+              <div>Loggin</div>        
+            </> 
+          ) : (                              
+            <>
+              <Navigation userName={userName}></Navigation>
+              <Outlet></Outlet>
+              
+            </>                     
+          )        
+        }    
+        </>     
     );
 
  }

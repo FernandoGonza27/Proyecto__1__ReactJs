@@ -1,19 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import "./navigation.scss"
 
-const Navigation =() => {
+const Navigation =({userName}) => {
+    const navigate = useNavigate(); 
+
+    const handleLogout = () =>{
+        navigate('/'); 
+        //funcion de desconectar usuario
+        //ya sea por parametro o echa aqui
+    }
+
     return(
         <div className="navigation">
             <div className="navigation__logo">
-                <img src={"https://media.istockphoto.com/id/542551196/es/vector/historieta-la-boca-ilustraci%C3%B3n-de-la-boca.jpg?s=1024x1024&w=is&k=20&c=VGI3trcAvzu2iLbpjG7HPT7GHNUs0gOBjwa2-H2C1nA="}/>
+                <img src={"/img/logo__app.png"}/>
             </div>
             <div className="navigation__menu">
                 <ul>
-                    <li><NavLink to="/">Home</NavLink></li>
-                    <li><NavLink to="/contact">Contact</NavLink></li>
-                    <li><NavLink to="/products">Products</NavLink></li>
-                    <li><NavLink to="/carts">Carts</NavLink></li>
+                    <li>Welcome  {userName}</li>
+                
                 </ul>
+            </div>
+            <div className="logout">
+                <div className="logout__close">
+                    <button onClick={handleLogout} >Logout</button></div>                
             </div>
         </div>
     );

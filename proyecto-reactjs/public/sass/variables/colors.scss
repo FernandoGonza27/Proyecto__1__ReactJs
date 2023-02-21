@@ -1,0 +1,23 @@
+$color--red: #e33535;
+$color--dark: #010101;
+$color--white: #ffffff;
+$color--transparent: #ffffffb6;
+$color--shadow:#000000B3;
+$color--gray:#AFAEAE;
+$bg--color: hsl(0, 0%, 15%);
+$text--color: hsl(0, 0%, 85%);
+$text--color--focus: white;
+$bg--contrast: hsl(0, 0%, 25%);
+$clr--stars:#ff8c00;
+
+
+.classic {
+    --data-color-primary: #DDDDDD; 
+    --data-color-secondary: #FC6471;
+}
+
+.dark {
+    --data-color-primary: #DDDDDD; 
+    --data-color-secondary: #FC6471;
+}
+    

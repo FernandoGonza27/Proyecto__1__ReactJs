@@ -25,16 +25,18 @@ import { useNavigate } from "react-router-dom";
         <div className="card__body">
           <div className="card__title">
             <h4>Id the Cart :{cart.id}</h4>
-            <button>              
-              <FontAwesomeIcon 
-              className="card__icon"
-              onClick={handleDelete} 
+            <button 
+            onClick={handleDelete} 
+            >              
+              <FontAwesomeIcon                           
               icon={faSkullCrossbones}
+              spin
+              size="lg"
               >Delete
               </FontAwesomeIcon>
             </button>
           </div>
-          <p>total payable is {cart.total}$</p>
+          <p>Total payable is {cart.total}$</p>
           <a href={"cart.url"} target="_blank" rel="noopener noreferrer">
             Go to the products
           </a>
