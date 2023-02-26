@@ -8,8 +8,8 @@ import Products from "../components/productos/products";
 const Carts = () => {
     const [data, setData] = useState(false);
     const [webCarts, setwebCarts] = useState([]);
-	const [webProducts, setwebProducts] = useState([]);
-	const [cartSelected, setcartSelected] =useState(false);
+	//const [webProducts, setwebProducts] = useState([]);
+	//const [cartSelected, setcartSelected] =useState(false);
     let userId =56;
 	//hook useEffect
 
@@ -52,13 +52,21 @@ const Carts = () => {
 		console.log(newCarts);
 		setwebCarts(newCarts);
 	}
-	const handleProducts = (cart) =>{
+	/*
+		const handleProducts = (cart) =>{
 		console.log(cart);		
 		setwebProducts(cart.products);
 		setcartSelected(!cartSelected);
 		console.log(cartSelected);
 		
 	}
+	*/
+	//const handleCloseProducts= () =>{
+	//	setcartSelected(!cartSelected);
+	//}
+
+	
+	//funcion de agregar el producto al cart 
 	return (
 		<div>
 			<button onClick={findCartOfUser}>hola</button>			
@@ -70,13 +78,11 @@ const Carts = () => {
 						key={cart.id} 
 						cart={cart} 
 						handleChoice={handleChoice}
-						handleProducts={handleProducts}
+						//handleProducts={handleProducts}
 					/>
 					))
 				}
-				{
-					cartSelected ?  <Products products={webProducts}/> : ""
-				}
+				
 				
 			</div>
 		</div>

@@ -1,13 +1,15 @@
 
 import axios from "axios";
 import './products.scss'
+import Close from "../buttons/buttonClose";
 
 import { useEffect,useState } from "react";
 //import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-const Products = ( products) => {
+
+import Product from "./product";
+const Products = ({products,handleCloseProducts}) => {
     const [data, setData] = useState(false);	
-	const navigate = useNavigate();
+	
 	//const location = useLocation();
 	//const products =location.state.products;
 	//console.log(products);
@@ -31,29 +33,29 @@ const Products = ( products) => {
 	const handleDelete  =() =>{
 		
 	}
-	//falta la funcion de mostrar los productos que no son del cart 
-	//ademas filtar los productos que ya estan el card para que no aparezcan
-	const showProducts   =() =>{
-		
+
+	const handleClose = () =>{
+		handleCloseProducts();
 	}
-	const handleNavigate = () =>{
-		navigate('/carts')
-	  }
 
 	return (
-			
-			<div>
-				
-				<p>hola</p>
-				
-				<div className='modal'>
-					<div  className='modal__content'>
+										
+				<div className='container'>
+					<div  className='container__products'>
 					
-						<p>EN 30 SEGUNDOS SE APAGARA TU PC </p>
-						<span className='close'>&times;</span>
+						{products.map((item) => (
+							//<li key={index}>{item.title}</li>										
+							<Product product={item} bought={true} />
+						))}
+						<div className="container__close">
+							<Close close={handleClose} />
+						</div>
+					</div>
+					<div  className='container__products'>
+					
 					</div>
 				</div>			
-			</div>
+			
 		
 	);
 }
@@ -65,8 +67,9 @@ export default Products;
 			<button onClick={handleNavigate}>Back the cardts</button>
 			<div className="list__cart__products">
 				<ul>				
-					{products.map((item, index) => (
-						<li key={index}>{item.title}</li>										
+					{data.map((item) => (
+							//<li key={index}>{item.title}</li>										
+							<Product product={item} bought={false} />
 					))}
 
 				</ul>

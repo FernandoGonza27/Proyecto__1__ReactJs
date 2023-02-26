@@ -1,5 +1,11 @@
-.modal {
-    display: none; /* Hidden by default */
+
+
+.container {
+    
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-gap: 10px;
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
     left: 0;
@@ -9,32 +15,29 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+    &__products{
+      //background-color: #000000;
+      margin: 15% auto; /* 15% from the top and centered */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    &__close{
+      width: 10%;
+      height: 25px;
+      margin: 1rem;
+      display: flex;
+      background-color: #ffffff;
+      align-items: center;
+      justify-content: center;
+    }
+   
+
   }
   
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #000000;
-    margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-  }
+
   
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
   
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
-  .close__spam{
-    
-  }
+ 
