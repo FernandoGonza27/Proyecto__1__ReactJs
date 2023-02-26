@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import WebsiteCard from "../components/Carts/WebsiteCard";
+import Products from "../components/productos/products";
+
 
 
 const Carts = () => {
     const [data, setData] = useState(false);
     const [webCarts, setwebCarts] = useState([]);
+	const [webProducts, setwebProducts] = useState([]);
+	const [cartSelected, setcartSelected] =useState(false);
     let userId =56;
 	//hook useEffect
 
@@ -48,6 +52,13 @@ const Carts = () => {
 		console.log(newCarts);
 		setwebCarts(newCarts);
 	}
+	const handleProducts = (cart) =>{
+		console.log(cart);		
+		setwebProducts(cart.products);
+		setcartSelected(!cartSelected);
+		console.log(cartSelected);
+		
+	}
 	return (
 		<div>
 			<button onClick={findCartOfUser}>hola</button>			
@@ -55,9 +66,18 @@ const Carts = () => {
 			<div className="card-grid">				
 				{
 					webCarts.map(cart => (
-					<WebsiteCard key={cart.id} cart={cart} handleChoice={handleChoice}/>
+					<WebsiteCard 
+						key={cart.id} 
+						cart={cart} 
+						handleChoice={handleChoice}
+						handleProducts={handleProducts}
+					/>
 					))
 				}
+				{
+					cartSelected ?  <Products products={webProducts}/> : ""
+				}
+				
 			</div>
 		</div>
 	);

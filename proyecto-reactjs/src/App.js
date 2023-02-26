@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Contacts from './pages/contacts';
 import Error from './pages/error';
-import Products from './pages/products';
+//import Products from './components/products/products';
 import Carts from './pages/carts';
 
 const router = createBrowserRouter([
@@ -20,10 +20,7 @@ const router = createBrowserRouter([
         path:"/contact",
         element :<Contacts/>
       },
-      {
-        path:"/products",
-        element :<Products/>
-      },
+      
       {
         path:"/carts",
         element :<Carts/>

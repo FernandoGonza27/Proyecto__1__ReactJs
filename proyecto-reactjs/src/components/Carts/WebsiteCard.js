@@ -4,12 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSkullCrossbones } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-    const WebsiteCard = ({cart,handleChoice}) => {
+    const WebsiteCard = ({cart,handleChoice,handleProducts}) => {
     const navigate = useNavigate();
+    
 
     const handleNavigate = () =>{
-      navigate(`/products/${cart.products}`)
-      //en este apartado debemos enviar los productos
+      let products =cart.products;
+      navigate('/products',{state:{products}})
+      
+    }
+    const handleSelect = () =>{
+      handleProducts(cart);
+      
     }
 
     const handleDelete = () =>{
@@ -37,7 +43,11 @@ import { useNavigate } from "react-router-dom";
             </button>
           </div>
           <p>Total payable is {cart.total}$</p>
-          <a href={"cart.url"} target="_blank" rel="noopener noreferrer">
+          <a               
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={handleSelect}
+          >
             Go to the products
           </a>
         </div>
