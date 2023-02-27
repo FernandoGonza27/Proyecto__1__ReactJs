@@ -1,5 +1,7 @@
 import { Outlet, useLocation} from "react-router-dom";
 import Navigation from "../components/navigation/navigation";
+import Login from "../components/Login/Login";
+
 
 
 
@@ -9,9 +11,9 @@ import Navigation from "../components/navigation/navigation";
     return(
         <>            
         { location.pathname === "/" ? (
-            //aria del login 
+            //area del login 
             <>     
-              <div>Loggin</div>        
+              <Login></Login>       
             </> 
           ) : (                              
             <>
