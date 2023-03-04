@@ -7,10 +7,14 @@ const Product = ({product,bought}) =>{
     const buttonAdd =(        
         <button>Add</button>
     );
+    const handleDelete = () =>  {
+      setbuy(!buy);
+    }  
     const buttonDelete =(        
-        <button>Delete</button>
+        <button onClick={handleDelete}>Delete</button>
         
     );
+   
     return (
         <>      
       <div

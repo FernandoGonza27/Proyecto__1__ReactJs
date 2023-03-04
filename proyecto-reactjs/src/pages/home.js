@@ -6,6 +6,7 @@ import Login from "../components/Login/Login";
 
 
  const Home = () =>{
+  
     let location = useLocation();
     let userName = "Rokie Balvoa";
     return(

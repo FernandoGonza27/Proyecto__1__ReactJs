@@ -7,46 +7,29 @@ import Products from "../productos/products";
 
     const WebsiteCard = ({cart,handleChoice}) => {
     const navigate = useNavigate();
-    const [webProducts, setwebProducts] = useState([]);
+    const [cartProducts, setCartProducts] = useState(cart.products);
+    const [total, settotal] = useState(cart.total)
+    const [id, setId] = useState(cart.id)
     const [cartSelected, setcartSelected] =useState(false);
+    const [countProducts, setCountProducts] = useState(cart.totalQuantity)
 
-    const handleNavigate = () =>{
-      let products =cart.products;
-      navigate('/products',{state:{products}})
-      
-    }
-    const handleSelect = () =>{
-      //handleProducts(cart);
-      console.log(cart);		
-		  setwebProducts(cart.products);
-		  setcartSelected(!cartSelected);
-		  console.log(cartSelected);
-      
-    }
+ 
     const handleCloseProducts= () =>{
 		  setcartSelected(!cartSelected);
 	  }
     const handleDelete = () =>{
       handleChoice(cart);
     }
-
-    const deleteProduct = (product) =>{
-      console.log(product);
-      const newProducts= webProducts.filter(product => product.id != product.id);
-      console.log(newProducts);
-      setwebProducts(newProducts);
-    }
-
     return (
       <>      
       <div
         className="card"
-        key={cart.id}
+        key={id}
         //</>onClick={handleClick}
       >
         <div className="card__body">
           <div className="card__title">
-            <h4>Id the Cart :{cart.id}</h4>
+            <h4>Id the Cart :{id}</h4>
            
             <button 
             onClick={handleDelete} 
@@ -54,19 +37,25 @@ import Products from "../productos/products";
                <Close close={handleDelete}/>
             </button>
           </div>
-          <p>Total payable is {cart.total}$</p>
+          <p>Quantity of products:{countProducts}</p>          
+          <p>Total payable is ${total}</p>          
           <a               
               target="_blank" 
               rel="noopener noreferrer"
-              onClick={handleSelect}
+              onClick={()=> setcartSelected(!cartSelected)}
           >
             Go to the products
           </a>
           {
 					cartSelected ?  <Products
-					 products={webProducts} 
+					 cartProducts={cartProducts}
+           setCartProducts={setCartProducts}
+           total={total}
+           settotal={settotal}
 					 handleCloseProducts={handleCloseProducts}
-					 />  : ""
+           countProducts ={countProducts}
+           setCountProducts ={setCountProducts}
+           />  : ""
 				  }
         </div>
       </div>

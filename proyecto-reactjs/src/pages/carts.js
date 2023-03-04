@@ -10,10 +10,17 @@ const Carts = () => {
     const [webCarts, setwebCarts] = useState([]);
 	//const [webProducts, setwebProducts] = useState([]);
 	//const [cartSelected, setcartSelected] =useState(false);
-    let userId =56;
-	//hook useEffect
+	const [userId, setuserId] = useState(0)
+    //let userId =1;
 
-    
+	//const user =localStorage.getItem('account');
+	//const userId = JSON.parse(user);
+	//console.log(user1.userId);
+	const getUser= () => {
+		const user =localStorage.getItem('account');
+		setuserId(JSON.parse(user).userId);
+	}
+
 	useEffect(() => {  		
 		axios
 			.get("https://dummyjson.com/carts")
@@ -26,30 +33,37 @@ const Carts = () => {
 			.catch(function (error) {
 				// handle error
 				console.log(error);
-			});						   
+			});	
+		
+					   
 	}, []);
 	
-	useEffect(() => {		
-		findCartOfUser();		
+	useEffect(() => {
+		getUser();			  
+		findCartOfUser();	  
 	}, [userId])
 	
-
-
+	
+	
+	
+	console.log(userId);
+	
     const findCartOfUser = () =>{    
 		const carts =[];    
-		for (let index = 0; index < data.length; index++) {			
-			//selectCardForUser(data[index]);
+		//const carts2 = data.find((cart => cart.userId === userId));
+		//console.log(carts2);
+		for (let index = 0; index < data.length; index++) {						
 			const cart = 	data[index];
 			cart.userId === userId ?  carts.push(cart) :console.log("");				
 		}  
 		
 		setwebCarts(carts);       
-		console.log(webCarts);        
+		//console.log(webCarts);        
     }
 	const handleChoice = (cart) =>{
 		console.log(cart);
 		const newCarts= webCarts.filter(card => card.id != cart.id);
-		console.log(newCarts);
+		//console.log(newCarts);
 		setwebCarts(newCarts);
 	}
 	/*

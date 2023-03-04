@@ -57,7 +57,9 @@ const Login = ({ param }) => {
             const newUsers = data.find((useru => useru.username === param.user));
             if (param.user === newUsers.username && param.password === newUsers.password) {
                 const { user, password } = param;
-                let ac = { user, password };
+                let userId=newUsers.id;
+                let userName= newUsers.firstName +" "+newUsers.lastName ;
+                let ac = { user, password,userId,userName};
                 let account = JSON.stringify(ac);
                 localStorage.setItem('account', account);
                 setIsLogin(true);
