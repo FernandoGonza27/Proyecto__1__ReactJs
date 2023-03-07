@@ -5,7 +5,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Contacts from './pages/contacts';
 import Error from './pages/error';
 //import Products from './components/products/products';
 import Carts from './pages/carts';
@@ -17,11 +16,6 @@ const router = createBrowserRouter([
     errorElement: <Error/>,
     children:[
       {
-        path:"/contact",
-        element :<Contacts/>
-      },
-      
-      {
         path:"/carts",
         element :<Carts/>
       }
@@ -32,6 +26,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <RouterProvider router={router} />
+
   );
 }
 

@@ -1,11 +1,12 @@
-.login-container{
+.login-container{    
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     gap: 20px;
     height: 80vh;
-    color: #71DC46;
+    
+    background:aqua;
 }
 
 .login-content{

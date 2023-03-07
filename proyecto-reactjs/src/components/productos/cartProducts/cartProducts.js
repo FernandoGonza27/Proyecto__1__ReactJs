@@ -9,7 +9,7 @@
     countProducts,
     setCountProducts
  }) =>{
-    console.log("canasta");    
+       
         const onDeleteProduct = product => {
 		const results = cartProducts.filter(
 			item => item.id !== product.id

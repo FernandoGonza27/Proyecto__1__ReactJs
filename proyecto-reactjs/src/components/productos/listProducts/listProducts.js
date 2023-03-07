@@ -21,7 +21,7 @@ const List =({dataProducts,
 
         return cardProduct;
     }
-    console.log("Lista");
+    
     const onAddProduct = product => {                
         if (cartProducts.find(item => item.id === product.id)) {
             const products = cartProducts.map(item =>

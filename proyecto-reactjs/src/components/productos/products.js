@@ -1,11 +1,10 @@
 
 import axios from "axios";
 import './products.scss'
-import Close from "../buttons/buttonClose";
-import Card from "./cartProducts";
-import List from "./listProducts";
+import Card from "./cartProducts/cartProducts";
+import List from "./listProducts/listProducts";
 import { useEffect,useState } from "react";
-//import { useLocation } from "react-router-dom";
+
 
 const Products = ({
 	cartProducts,
@@ -40,8 +39,8 @@ const Products = ({
 				<div className='container'>
 	
 					<div  className='container__products'>
-					<div className="container__close">
-							<Close close={handleClose} />
+					<div className="container__close">							
+							<button onClick={handleClose}>X</button>
 					</div>
 					<Card
 						cartProducts={cartProducts}
@@ -50,9 +49,7 @@ const Products = ({
 						settotal={settotal}	
 						countProducts ={countProducts}
            				setCountProducts ={setCountProducts}																			
-					/>
-					
-															
+					/>																				
 					</div>
 					{
 						data ? <List
@@ -73,23 +70,3 @@ const Products = ({
 }
 
 export default Products;
-
-/*
-	
-			<button onClick={handleNavigate}>Back the cardts</button>
-			<div className="list__cart__products">
-				<ul>				
-					{data.map((item) => (
-							//<li key={index}>{item.title}</li>										
-							<Product product={item} bought={false} />
-					))}
-
-				</ul>
-
-			</div>
-			
-			<div>
-				<button onClick={handelAdd}>Add to the cart</button>
-				<button onClick={handleDelete}>Delete to de cart</button>
-			</div>		
-*/
