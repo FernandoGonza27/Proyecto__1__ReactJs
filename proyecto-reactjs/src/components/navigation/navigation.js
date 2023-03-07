@@ -1,7 +1,9 @@
 import { useNavigate, NavLink } from "react-router-dom";
 import "./navigation.scss"
 
-const Navigation =({userName}) => {
+const Navigation =() => {
+    const user =localStorage.getItem('account');		
+	let userName=JSON.parse(user).userName;
     const navigate = useNavigate(); 
 
     const handleLogout = () =>{

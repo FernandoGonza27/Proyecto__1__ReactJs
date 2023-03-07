@@ -30,27 +30,45 @@ const Carts = () => {
 		const newCarts= webCarts.filter(card => card.id != cart.id);		
 		setwebCarts(newCarts);
 	}
-	return (
-		<div >					
-			<h2>Carts of User </h2>			
-			<div className="card-grid">				
-				{
-					webCarts ? 					
-						webCarts.map(cart => (
-							<WebsiteCard 
-								key={cart.id} 
-								cart={cart} 
-								handleChoice={handleChoice}						
-							/>
-							
-						))
-					
-					:<p>Loading....</p>
-					
-				}								
-			</div>
+	const helper =(
+		<div className="helper">
+			<h2>You have no pending carts</h2>
 		</div>
 	);
+	
+	
+	console.log(webCarts.length);
+	console.log(webCarts);
+	if(webCarts.length != 0){
+		return (
+			<div >					
+				<h2>Carts of User </h2>			
+				<div className="card-grid">	
+				
+					
+							
+					{	
+						webCarts ? 					
+							webCarts.map(cart => (
+								<WebsiteCard 
+									key={cart.id} 
+									cart={cart} 
+									handleChoice={handleChoice}						
+								/>
+								
+							))
+						
+						:<p>Loading....</p>
+						
+					}								
+				</div>
+			</div>
+		);
+	}else{
+		 return helper;
+		
+	}
+	
 }
 
 export default Carts;

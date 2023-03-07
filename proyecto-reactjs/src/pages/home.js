@@ -10,7 +10,7 @@ import Login from "../components/Login/Login";
  const Home = () =>{
   
     let location = useLocation();
-    let userName = "Rokie Balvoa";
+    
     return(
         <>            
         { location.pathname === "/" ? (
@@ -20,7 +20,7 @@ import Login from "../components/Login/Login";
             </> 
           ) : (                              
             <>
-              <Navigation userName={userName}></Navigation>
+              <Navigation></Navigation>
               
               <Outlet></Outlet>
               
