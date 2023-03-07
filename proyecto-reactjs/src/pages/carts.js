@@ -6,20 +6,16 @@ import WebsiteCard from "../components/Carts/WebsiteCard";
 
 
 const Carts = () => {
-    const [data, setData] = useState(false);
+    //const [data, setData] = useState(false);
     const [webCarts, setwebCarts] = useState([]);
-	const [userId, setuserId] = useState(0)
+	const user =localStorage.getItem('account');		
+	let userId=JSON.parse(user).userId;
 
-	const getUser= () => {
-		const user =localStorage.getItem('account');
-		setuserId(JSON.parse(user).userId);
-	}
-	
 	useEffect(() => {  		
 		axios
-			.get("https://dummyjson.com/carts")
+			.get(`https://dummyjson.com/carts/user/${userId}`)
 			.then(function (response) {			
-				setData(response.data.carts);
+				setwebCarts(response.data.carts);
                 
 
 			})
@@ -30,41 +26,27 @@ const Carts = () => {
 		
 					   
 	}, []);
-	
-	useEffect(() => {
-		getUser();			  
-		findCartOfUser();	  
-	}, [userId])
-
-	
-    const findCartOfUser = () =>{    
-		const carts =[];    
-		for (let index = 0; index < data.length; index++) {						
-			const cart = 	data[index];
-			cart.userId === userId ?  carts.push(cart) :console.log("");				
-		}  
-
-		setwebCarts(carts);       
-	       
-    }
 	const handleChoice = (cart) =>{
 		const newCarts= webCarts.filter(card => card.id != cart.id);		
 		setwebCarts(newCarts);
 	}
-	
 	return (
-		<div >
-			<button onClick={findCartOfUser}>hola</button>			
+		<div >					
 			<h2>Carts of User </h2>			
 			<div className="card-grid">				
 				{
-					webCarts.map(cart => (
-					<WebsiteCard 
-						key={cart.id} 
-						cart={cart} 
-						handleChoice={handleChoice}						
-					/>
-					))
+					webCarts ? 					
+						webCarts.map(cart => (
+							<WebsiteCard 
+								key={cart.id} 
+								cart={cart} 
+								handleChoice={handleChoice}						
+							/>
+							
+						))
+					
+					:<p>Loading....</p>
+					
 				}								
 			</div>
 		</div>
