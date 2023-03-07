@@ -20,8 +20,8 @@ import Products from "../productos/products";
     const handleDelete = () =>{
       handleChoice(cart);
     }
-    return (
-      <>      
+
+    const userCart =(
       <div
         className="card"
         key={id}
@@ -46,7 +46,14 @@ import Products from "../productos/products";
           >
             Go to the products
           </a>
-          {
+
+        </div>
+      </div>
+    );
+    return (
+      <>      
+      
+      {
 					cartSelected ?  <Products
 					 cartProducts={cartProducts}
            setCartProducts={setCartProducts}
@@ -55,11 +62,8 @@ import Products from "../productos/products";
 					 handleCloseProducts={handleCloseProducts}
            countProducts ={countProducts}
            setCountProducts ={setCountProducts}
-           />  : ""
+           />  : userCart
 				  }
-        </div>
-      </div>
-      
       </>
     );
 }

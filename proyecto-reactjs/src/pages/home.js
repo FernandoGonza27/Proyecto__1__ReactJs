@@ -5,6 +5,7 @@ import Login from "../components/Login/Login";
 
 
 
+
  const Home = () =>{
   
     let location = useLocation();
@@ -20,6 +21,7 @@ import Login from "../components/Login/Login";
             <>
               <Navigation userName={userName}></Navigation>
               <Outlet></Outlet>
+              
               
             </>                     
           )        

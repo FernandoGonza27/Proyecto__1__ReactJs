@@ -61,26 +61,11 @@ const Carts = () => {
 		//console.log(webCarts);        
     }
 	const handleChoice = (cart) =>{
-		console.log(cart);
-		const newCarts= webCarts.filter(card => card.id != cart.id);
-		//console.log(newCarts);
+		//console.log(cart);
+		const newCarts= webCarts.filter(card => card.id != cart.id);		
 		setwebCarts(newCarts);
 	}
-	/*
-		const handleProducts = (cart) =>{
-		console.log(cart);		
-		setwebProducts(cart.products);
-		setcartSelected(!cartSelected);
-		console.log(cartSelected);
-		
-	}
-	*/
-	//const handleCloseProducts= () =>{
-	//	setcartSelected(!cartSelected);
-	//}
-
 	
-	//funcion de agregar el producto al cart 
 	return (
 		<div>
 			<button onClick={findCartOfUser}>hola</button>			
@@ -92,7 +77,7 @@ const Carts = () => {
 						key={cart.id} 
 						cart={cart} 
 						handleChoice={handleChoice}
-						//handleProducts={handleProducts}
+						
 					/>
 					))
 				}
