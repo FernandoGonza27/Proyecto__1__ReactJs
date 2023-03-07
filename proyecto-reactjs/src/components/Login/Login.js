@@ -82,7 +82,6 @@ const Login = ({ param }) => {
     };
 
     return (
-        <div className='layout'>
                 <div className='login-container'>
             {isLogin ? navigate('/carts') :
                 <div className='login-content'>
@@ -126,10 +125,7 @@ const Login = ({ param }) => {
                     </div>
                 </div>
             }
-        </div>
-
-        </div>
-        
+        </div>   
     )
 };
 
