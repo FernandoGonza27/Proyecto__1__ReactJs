@@ -48,7 +48,7 @@ const List =({dataProducts,
                     <div>
                         <h2>{product.title}</h2>
                         <p>${product.price}</p>
-                        <button onClick={() => onAddProduct(convertProduct(product))} >
+                        <button className='btn-clear-all' onClick={() => onAddProduct(convertProduct(product))} >
                             Add to de Cart
                         </button>
                     </div>
