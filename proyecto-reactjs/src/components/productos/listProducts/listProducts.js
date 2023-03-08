@@ -1,4 +1,4 @@
-
+import "./listProducts.scss"
 const List =({dataProducts,
     cartProducts,
     setCartProducts,
@@ -39,9 +39,9 @@ const List =({dataProducts,
         
 	};
     return(
-        <div>
+        <div className="grid-container">
             {dataProducts.map(product =>(
-                <div key={product.id}>
+                <div className="grid-item1" key={product.id}>
                     <figure>
                         <img src={product.thumbnail} alt={product.title}/>
                     </figure>

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect,useState } from "react";
 import WebsiteCard from "../components/Carts/WebsiteCard";
 
+import"../components/Carts/cardsStyle.scss";
 
 
 
@@ -41,12 +42,9 @@ const Carts = () => {
 	console.log(webCarts);
 	if(webCarts.length != 0){
 		return (
-			<div >					
+			<div  className="cart__container">					
 				<h2>Carts of User </h2>			
-				<div className="card-grid">	
-				
-					
-							
+				<div className="card-grid">																	
 					{	
 						webCarts ? 					
 							webCarts.map(cart => (

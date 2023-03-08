@@ -1,4 +1,4 @@
- import "./cartProducts.css"
+ import "./cartProducts.scss"
  
  
  const Card = ({
@@ -27,7 +27,7 @@
 	};
     return(
         <>
-            <div>
+            <div className="container-cart-products">
 					{cartProducts.length ? (
 						<>
 							<div className='row-product'>

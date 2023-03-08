@@ -36,9 +36,9 @@ const Products = ({
 	}
 
 	return (										
-				<div className='container'>
+			<div className="container">
 	
-					<div  className='container__products'>
+				<div className="container__cart"  >
 					<div className="container__close">							
 							<button onClick={handleClose}>X</button>
 					</div>
@@ -50,7 +50,9 @@ const Products = ({
 						countProducts ={countProducts}
            				setCountProducts ={setCountProducts}																			
 					/>																				
-					</div>
+				</div>
+				<div className="container__list">
+
 					{
 						data ? <List
 						dataProducts={data}
@@ -62,9 +64,10 @@ const Products = ({
            				setCountProducts ={setCartProducts}				
 						/> :<p>Loading.....</p>
 					}	
+				</div>
 
 				
-				</div>						
+			</div>						
 		
 	);
 }
