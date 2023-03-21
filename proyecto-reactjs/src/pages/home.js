@@ -20,8 +20,7 @@ import Login from "../components/Login/Login";
             </> 
           ) : (                              
             <>
-              <Navigation></Navigation>
-              
+              <Navigation></Navigation>  
               <Outlet></Outlet>
               
             </>                     

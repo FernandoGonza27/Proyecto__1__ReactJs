@@ -1,132 +1,121 @@
-import React, { useState, useEffect } from 'react';
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import './Login.scss';
-import Title from '../Title/title';
-import Label from '../Label/Label';
-import Input from '../input/Input';
 
+import { useEffect, useState } from 'react';
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import AuthProvider from '../authprovider/authprovider';
+import { Link } from "react-router-dom";
 
-const Login = ({ param }) => {
+const auth = getAuth();
+const Login = () => {
+    const navigate = useNavigate();         
+    //const [currentuser, setCurrentUser] = useState(null);
 
+    /*
+    staet
+    0 inicia
+    1 loanding
+    2 loging comnpletd
+    3 login sin registro
+    4 no hay nadie logueado 
 
-    const [user, setUser] = useState('');
-    const [data, setData] = useState(false);
-    const [webCarts, setwebCarts] = useState([]);
-    const [password, setPassword] = useState('');
-    const [passwordError, setPasswordError] = useState(false);
-    const [isLogin, setIsLogin] = useState(false);
-    const [hasError, setHasError] = useState(false);
-    const navigate = useNavigate();
+    */
+    const [state, setCurrentState] = useState(0);
 
-
-    function handleChange(name, value) {
-        if (name === 'usuario') {
-            setUser(value);
-            setHasError(false);
-        } else {
-            if (value.length < 6) {
-                setPasswordError(true);
-                setHasError(false);
-            } else {
-                setPasswordError(false)
-                setPassword(value);
-                setHasError(false);
-            }
-        }
-    };
-
-    useEffect(() => {
-        axios
-            .get("https://dummyjson.com/users")
-            .then(function (response) {
-                // handle success				
-                setData(response.data.users);
-
-
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-    }, []);
-
-
-    function ifMatch(param) {
-        if (param.user.length > 0 && param.password.length > 0) {
-            const newUsers = data.find((useru => useru.username === param.user));
-            if (param.user === newUsers.username && param.password === newUsers.password) {
-                const { user, password } = param;
-                let userId=newUsers.id;
-                let userName= newUsers.firstName +" "+newUsers.lastName ;
-                let ac = { user, password,userId,userName};
-                let account = JSON.stringify(ac);
-                localStorage.setItem('account', account);
-                setIsLogin(true);
-
-            } else {
-                setIsLogin(false);
-                setHasError(true);
-            }
-        } else {
-            setIsLogin(false);
-            setHasError(true);
-        }
-    };
-
-    function handleSubmit() {
-        let account = { user, password }
-        if (account) {
-            ifMatch(account)
-        }
-    };
-
-    return (
-                <div className='login-container'>
-            {isLogin ? navigate('/carts') :
-                <div className='login-content'>
-                    <Title text='Login' />
-                    {hasError &&
-                        <label className='label-alert'>
-                            Su contraseña o usuario son incorrectos, o no existen en nuestra plataforma
-                        </label>
+    /*
+    useEffect(()=>{
+        setCurrentState(1);
+        onAuthStateChanged(auth, (user) => {
+            if(user){
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                      // User is signed in, see docs for a list of available properties
+                      // https://firebase.google.com/docs/reference/js/firebase.User
+                      const uid = user.uid;
+                      navigate("/");
+                      setCurrentState(2);                  
+                      console.log(user);
+                    } else {
+                      // User is signed out
+                      setCurrentState(3);
                     }
-                    <Label text='Usuario' />
-                    <Input
-                        attribute={{
-                            id: 'usuario',
-                            name: 'usuario',
-                            type: 'text',
-                            placeholder: 'Ingrese su usuario'
-                        }}
-                        handleChange={handleChange}
-                    />
-                    <Label text='Contraseña' />
-                    <Input
-                        attribute={{
-                            id: 'contraseña',
-                            name: 'contraseña',
-                            type: 'password',
-                            placeholder: 'Ingrese su contraseña',
-                        }}
-                        handleChange={handleChange}
-                        param={passwordError}
-                    />
-
-                    {passwordError &&
-                        <label className='label-error'>
-                            Contraseña incompleta
-                        </label>
-                    }
-                    <div className='button-container'>
-                        <button onClick={handleSubmit} className='submit-button'>
-                            Ingresar
-                        </button>
-                    </div>
-                </div>
+                  });                        
+            }else{
+                setCurrentState(4);
+                console.log("no hay nadie autenticado ")
             }
-        </div>   
-    )
-};
 
+        });
+
+    },[navigate])
+    */
+
+
+    const handleOnClik =()=> {
+        const provider = new GoogleAuthProvider();
+        singInGoogle(provider);
+    }
+    
+    const singInGoogle =(provider)=> {        
+        signInWithPopup(auth, provider)
+        .then((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;            
+            // The signed-in user info.
+            const user = result.user;
+            console.log(user)
+            // IdP data available using getAdditionalUserInfo(result)
+            // ...
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            // ...
+        });
+    }
+
+    const handleUserLoggedIn = (user) => {
+       navigate('/carts'); 
+       console.log(user.accessToken);
+    }
+    const handleUserNotRegisterd = (user) => {
+        //navigate('/');
+
+    }
+    const handleUserNotLoggedIn = () => {
+        setCurrentState(4);
+    }
+    if ( state ==4){
+        return (
+            <>                            
+                <div>
+                    <Link
+                                 
+                    onClick={handleOnClik}
+
+                    >
+                    
+                    Login
+                    </Link>  
+                </div>          
+            </>            
+        )
+    }
+    return(
+        <AuthProvider
+        onUserLoggedIn={handleUserLoggedIn} 
+        onUserNotRegister={handleUserNotRegisterd} 
+        onUserNotLoggedIn={handleUserNotLoggedIn}
+        >
+        <div>Loading...</div>
+        </AuthProvider>
+       );
+    
+
+    
+}
 export default Login;

@@ -38,7 +38,7 @@
 												{product.quantity}
 											</span>
 											<p className='titulo-producto-carrito'>
-												{product.title}
+												{product.name}
 											</p>
 											<span className='precio-producto-carrito'>
 												${product.price}

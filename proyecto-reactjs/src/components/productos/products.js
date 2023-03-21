@@ -4,7 +4,7 @@ import './products.scss'
 import Card from "./cartProducts/cartProducts";
 import List from "./listProducts/listProducts";
 import { useEffect, useState } from "react";
-
+import { getWebsites } from "../../firebase/api";
 
 const Products = ({
 	cartProducts,
@@ -17,19 +17,21 @@ const Products = ({
 
 }) => {
 	const [data, setData] = useState(false);
+	const getProducts =async () =>{
+		let collection ="Products"
+		const querySnapshot = await getWebsites(collection);
+		// onGetLinks((querySnapshot) => {
+		const docs = [];
+		querySnapshot.forEach((doc) => {
+		  docs.push({ ...doc.data(), id: doc.id });
+		});
+		setData(docs);
+
+	}
+
 	useEffect(() => {
-		axios
-			.get("https://dummyjson.com/products")
-			.then(function (response) {
-
-				setData(response.data.products);
-			})
-			.catch(function (error) {
-
-				console.log(error);
-			});
+		getProducts();
 	}, []);
-
 
 	const handleClose = () => {
 		handleCloseProducts();

@@ -28,6 +28,7 @@ import Products from "../productos/products";
             <h4>Id the Cart :{id}</h4>           
             <button onClick={handleDelete}>X</button>
           </div>
+          <p>Total of quantity is{countProducts}</p>    
           <p>Total payable is ${total}</p>          
           <a               
               target="_blank" 

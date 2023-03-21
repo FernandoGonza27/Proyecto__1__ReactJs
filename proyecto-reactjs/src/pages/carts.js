@@ -1,31 +1,33 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import WebsiteCard from "../components/Carts/WebsiteCard";
-
+import { getAuth} from "firebase/auth";
 import "../components/Carts/cardsStyle.scss";
+import { getWebsites } from "../firebase/api";
+import { collection } from "firebase/firestore";
 
 
 
 const Carts = () => {
 	//const [data, setData] = useState(false);
-	const [webCarts, setwebCarts] = useState([]);
-	const user = localStorage.getItem('account');
-	let userId = JSON.parse(user).userId;
+	const [webCarts, setwebCarts] = useState([]);	
+	const auth = getAuth();
+    const userId = auth.currentUser;
+
+	const getCarts =async () =>{
+		let collection ="Carts";
+		const querySnapshot = await getWebsites(collection);
+		// onGetLinks((querySnapshot) => {
+		const docs = [];
+		querySnapshot.forEach((doc) => {
+		  docs.push({ ...doc.data(), id: doc.id });
+		});
+		setwebCarts(docs);
+
+	}
 
 	useEffect(() => {
-		axios
-			.get(`https://dummyjson.com/carts/user/${userId}`)
-			.then(function (response) {
-				setwebCarts(response.data.carts);
-
-
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			});
-
-
+		getCarts();
 	}, []);
 	const handleChoice = (cart) => {
 		const newCarts = webCarts.filter(card => card.id != cart.id);
@@ -47,16 +49,21 @@ const Carts = () => {
 					<div className="title-carts">
 						<h2> Carts of User</h2>
 					</div>
+					<div className="title-carts">
+						<button> new cart</button>
+					</div>
 					<div className="card-grid">
 						{
 							webCarts ?
 								webCarts.map(cart => (
+									
 									<WebsiteCard
 										key={cart.id}
 										cart={cart}
 										handleChoice={handleChoice}
 									/>
-
+									
+									
 								))
 									
 								: <p>Loading....</p>

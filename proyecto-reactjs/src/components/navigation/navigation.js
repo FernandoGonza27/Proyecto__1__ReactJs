@@ -1,17 +1,22 @@
 import { useNavigate, NavLink } from "react-router-dom";
 import "./navigation.scss"
+import { getAuth, signOut} from "firebase/auth";
 
 const Navigation =() => {
-    const user =localStorage.getItem('account');		
-	let userName=JSON.parse(user).userName;
+    const auth = getAuth();
+    const user = auth.currentUser;
     const navigate = useNavigate(); 
-
-    const handleLogout = () =>{
-        navigate('/'); 
-        //funcion de desconectar usuario
-        //ya sea por parametro o echa aqui
-    }
-
+    console.log(user);
+    const handleLogout = async () =>{
+               
+        const auth = getAuth();
+        await signOut(auth).then(() => {
+           console.log("Sign-out successful.");
+           navigate('/');  
+        }).catch((error) => {
+          // An error happened.
+        });     
+    }    
     return(
         <div className="navigation">
             <div className="navigation__logo">
@@ -19,7 +24,7 @@ const Navigation =() => {
             </div>
             <div className="navigation__menu">
                 <ul>
-                    <li>Welcome  {userName}</li>
+                    <li>Welcome {user.displayName}</li>
                 
                 </ul>
             </div>

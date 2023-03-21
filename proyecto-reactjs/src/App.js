@@ -1,6 +1,7 @@
 
 import './App.css';
 import Home from './pages/home';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,9 +25,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
+  return (    
     <RouterProvider router={router} />
-
+    
   );
 }
 

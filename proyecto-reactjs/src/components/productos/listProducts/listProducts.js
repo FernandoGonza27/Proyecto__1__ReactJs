@@ -8,19 +8,7 @@ const List =({dataProducts,
     setCountProducts
 }) =>{
 
-    const convertProduct =(product) =>{
-        const cardProduct ={
-            "id": product.id,
-            "title": product.title,
-            "price": product.price,
-            "quantity": 1,
-            //"total": 100,
-            //"discountPercentage": 12.05,
-            //"discountedPrice": 88
-        };
-
-        return cardProduct;
-    }
+    
     
     const onAddProduct = product => {                
         if (cartProducts.find(item => item.id === product.id)) {
@@ -43,12 +31,12 @@ const List =({dataProducts,
             {dataProducts.map(product =>(
                 <div className="grid-item1" key={product.id}>
                     <figure>
-                        <img src={product.thumbnail} alt={product.title}/>
+                        <img src={product.image} alt={product.name}/>
                     </figure>
                     <div>
-                        <h2>{product.title}</h2>
+                        <h2>{product.name}</h2>
                         <p>${product.price}</p>
-                        <button className='btn-clear-all' onClick={() => onAddProduct(convertProduct(product))} >
+                        <button className='btn-clear-all' onClick={() => onAddProduct(product)} >
                             Add to de Cart
                         </button>
                     </div>
