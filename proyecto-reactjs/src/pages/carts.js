@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import WebsiteCard from "../components/Carts/WebsiteCard";
 import { getAuth} from "firebase/auth";
 import "../components/Carts/cardsStyle.scss";
-import { getWebsites } from "../firebase/api";
+import { getWebsites, saveWebsite,getUserCarts } from "../firebase/api";
 import { collection } from "firebase/firestore";
 
 
@@ -12,18 +12,20 @@ const Carts = () => {
 	//const [data, setData] = useState(false);
 	const [webCarts, setwebCarts] = useState([]);	
 	const auth = getAuth();
-    const userId = auth.currentUser;
+    const userId = auth.currentUser.uid;
 
 	const getCarts =async () =>{
 		let collection ="Carts";
+		const querySnapshotUser = await getUserCarts(collection,userId);
 		const querySnapshot = await getWebsites(collection);
 		// onGetLinks((querySnapshot) => {
+		console.log(querySnapshotUser);
 		const docs = [];
 		querySnapshot.forEach((doc) => {
-		  docs.push({ ...doc.data(), id: doc.id });
+		  docs.push(	{ ...doc.data(), id: doc.id });
 		});
-		setwebCarts(docs);
-
+		setwebCarts(querySnapshotUser);
+		console.log(webCarts)
 	}
 
 	useEffect(() => {
@@ -33,15 +35,23 @@ const Carts = () => {
 		const newCarts = webCarts.filter(card => card.id != cart.id);
 		setwebCarts(newCarts);
 	}
+	const addNewCart = async() =>{		
+		const initialState = {
+			discount: 0,
+			products: [],
+			total: 0,
+			totalQuantity:0,
+			userId:userId
+		  };
+		await saveWebsite(initialState);
+
+	}
 	const helper = (
 		<div className="helper">
 			<h2>You have no pending carts</h2>
 		</div>
-	);
-
-
-	console.log(webCarts.length);
-	console.log(webCarts);
+	);	
+	
 	if (webCarts.length != 0) {
 		return (
 			<div>
@@ -50,21 +60,21 @@ const Carts = () => {
 						<h2> Carts of User</h2>
 					</div>
 					<div className="title-carts">
-						<button> new cart</button>
+						<button onClick={addNewCart}> new cart</button>
 					</div>
 					<div className="card-grid">
 						{
 							webCarts ?
-								webCarts.map(cart => (
+							webCarts.map(cart => (
 									
-									<WebsiteCard
-										key={cart.id}
-										cart={cart}
-										handleChoice={handleChoice}
-									/>
-									
-									
-								))
+								<WebsiteCard
+									key={cart.id}
+									cart={cart}
+									handleChoice={handleChoice}
+								/>
+								
+								
+							))
 									
 								: <p>Loading....</p>
 

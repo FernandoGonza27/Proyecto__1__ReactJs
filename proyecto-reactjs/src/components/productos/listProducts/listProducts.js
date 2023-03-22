@@ -22,7 +22,7 @@ const List =({dataProducts,
             return setCartProducts([...products]);
         }
 		settotal(total + product.price * product.quantity);
-		setCountProducts(countProducts + product.quantity);
+		setCountProducts( product.quantity + countProducts );
 		setCartProducts([...cartProducts, product]);
         
 	};

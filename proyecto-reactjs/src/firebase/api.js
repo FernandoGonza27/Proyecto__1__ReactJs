@@ -8,6 +8,7 @@ import {
   query,
   getDoc,
   getDocs,
+  where
 } from "firebase/firestore";
 import { db } from "./config";
 
@@ -18,6 +19,7 @@ export const saveWebsite = (newLink) =>
 
 export const updateWebsite = (id, updatedFields) =>
   updateDoc(doc(db, collectionName, id), updatedFields);
+
 
 export const onGetLinks = (callback) => {
   const unsub = onSnapshot(collection(db, collectionName), callback);
@@ -37,3 +39,15 @@ export const usersExist = (uid) =>{
   
   return true;
 }
+export const getUserCarts = (collectionname1,userId) =>{
+  const q = query(collection(db, collectionname1), where("userId", "==", userId));
+  const carts= [];
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      carts.push(doc);
+    });
+    
+  });
+  return carts;
+}
+  

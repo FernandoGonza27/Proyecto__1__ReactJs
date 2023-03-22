@@ -4,7 +4,7 @@ import { useState } from "react";
 import Products from "../productos/products";
 
     const WebsiteCard = ({cart,handleChoice}) => {    
-    const [cartProducts, setCartProducts] = useState(cart.products);
+    const [cartProducts, setCartProducts] = useState([]);
     const [total, settotal] = useState(cart.total)
     const [id, setId] = useState(cart.id)
     const [cartSelected, setcartSelected] =useState(false);
