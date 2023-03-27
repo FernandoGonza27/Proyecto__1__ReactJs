@@ -1,16 +1,18 @@
  import "./cartProducts.scss"
- 
+ import { updateWebsite } from "../../../firebase/api";
  
  const Card = ({
+	cartId,
     cartProducts,
     setCartProducts,
 	total,
 	settotal,
     countProducts,
-    setCountProducts
+    setCountProducts,
+	userId
  }) =>{
-       
-        const onDeleteProduct = product => {
+    const collectionname1= "Carts";
+    const onDeleteProduct = product => {
 		const results = cartProducts.filter(
 			item => item.id !== product.id
 		);
@@ -18,13 +20,38 @@
 		settotal(total - product.price * product.quantity);
 		setCountProducts(countProducts - product.quantity);
 		setCartProducts(results);
+		saveProduct();
 	};
 
-    const onCleanCart = () => {
+    const onCleanCart = async()  => {
 		setCartProducts([]);
 		settotal(0);
-		setCountProducts(0);
+		setCountProducts(0)
+		const updatedcart = {
+            discount: 0,
+            products: [],
+            total: 0,
+            totalQuantity:0,
+            userId: userId
+        };
+		 console.log(updatedcart);
+         await updateWebsite(collectionname1,cartId, updatedcart);
 	};
+	const saveProduct =async ()=>{
+        
+        ///Formar el objeto cart con los estados del cart        
+        console.log("pass");
+        const updatedcart = {
+            discount: 0,
+            products: cartProducts,
+            total: total,
+            totalQuantity:countProducts,
+            userId: userId
+        };
+		 console.log(updatedcart);
+         await updateWebsite(collectionname1,cartId, updatedcart);
+    }
+	
     return(
         <>
             <div className="container-cart-products">

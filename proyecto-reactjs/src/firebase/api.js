@@ -12,25 +12,24 @@ import {
 } from "firebase/firestore";
 import { db } from "./config";
 
-const collectionName = "Carts";
-
-export const saveWebsite = (newLink) =>
+//cambiar meterdo con parametro de compartible de base 
+export const saveWebsite = (newLink,collectionName) =>
   addDoc(collection(db, collectionName), newLink);
 
-export const updateWebsite = (id, updatedFields) =>
-  updateDoc(doc(db, collectionName, id), updatedFields);
+export const updateWebsite = (collectionname1,id, updatedFields) =>
+  updateDoc(doc(db, collectionname1, id), updatedFields);
 
 
-export const onGetLinks = (callback) => {
+export const onGetLinks = (callback,collectionName) => {
   const unsub = onSnapshot(collection(db, collectionName), callback);
   return unsub;
 };
 
-export const getWebsites = (collectionname1) => getDocs(collection(db, collectionname1));
+export const getWebsites = (collectionName) => getDocs(collection(db, collectionName));
 
-export const deleteWebsite = (id) => deleteDoc(doc(db, collectionName, id));
+export const deleteWebsite = (id,collectionName) => deleteDoc(doc(db, collectionName, id));
 
-export const getWebsite = (id) => getDoc(doc(db, collectionName, id));
+export const getWebsite = (id,collectionName) => getDoc(doc(db, collectionName, id));
 
 
 export const usersExist = (uid) =>{
@@ -44,7 +43,7 @@ export const getUserCarts = (collectionname1,userId) =>{
   const carts= [];
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      carts.push(doc);
+      carts.push(	{ ...doc.data(), id: doc.id });
     });
     
   });

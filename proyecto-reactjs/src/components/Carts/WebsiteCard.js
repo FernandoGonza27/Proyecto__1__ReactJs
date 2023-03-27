@@ -3,12 +3,12 @@ import "./cardsStyle.scss"
 import { useState } from "react";
 import Products from "../productos/products";
 
-    const WebsiteCard = ({cart,handleChoice}) => {    
-    const [cartProducts, setCartProducts] = useState([]);
+    const WebsiteCard = ({cart,handleChoice,userId}) => {    
+    const [cartProducts, setCartProducts] = useState(cart.products);
     const [total, settotal] = useState(cart.total)
     const [id, setId] = useState(cart.id)
     const [cartSelected, setcartSelected] =useState(false);
-    const [countProducts, setCountProducts] = useState(cart.totalQuantity)
+    const [countProducts, setCountProducts] = useState(3)
 
  
     const handleCloseProducts= () =>{
@@ -44,6 +44,7 @@ import Products from "../productos/products";
       <>            
       {
 					cartSelected ?  <Products
+           cartId={id}
 					 cartProducts={cartProducts}
            setCartProducts={setCartProducts}
            total={total}
@@ -51,6 +52,7 @@ import Products from "../productos/products";
 					 handleCloseProducts={handleCloseProducts}
            countProducts ={countProducts}
            setCountProducts ={setCountProducts}
+           userId={userId}
            />  : userCart
 				  }
       </>

@@ -3,37 +3,39 @@ import { useEffect, useState } from "react";
 import WebsiteCard from "../components/Carts/WebsiteCard";
 import { getAuth} from "firebase/auth";
 import "../components/Carts/cardsStyle.scss";
-import { getWebsites, saveWebsite,getUserCarts } from "../firebase/api";
+import { getWebsites, saveWebsite,getUserCarts,deleteWebsite } from "../firebase/api";
 import { collection } from "firebase/firestore";
-
 
 
 const Carts = () => {
 	//const [data, setData] = useState(false);
 	const [webCarts, setwebCarts] = useState([]);	
 	const auth = getAuth();
-    const userId = auth.currentUser.uid;
-
-	const getCarts =async () =>{
-		let collection ="Carts";
+    const userId = auth.currentUser.uid;//pasarlo como paramtro  y crear funcion para solo llemar una vez 
+	let collection ="Carts";
+	const getCarts =async () =>{		
 		const querySnapshotUser = await getUserCarts(collection,userId);
+		
 		const querySnapshot = await getWebsites(collection);
-		// onGetLinks((querySnapshot) => {
-		console.log(querySnapshotUser);
-		const docs = [];
-		querySnapshot.forEach((doc) => {
-		  docs.push(	{ ...doc.data(), id: doc.id });
-		});
-		setwebCarts(querySnapshotUser);
-		console.log(webCarts)
+		
+			/* 	onGetLinks((querySnapshot) => {
+			const docs = [];
+			querySnapshot.forEach((doc) => {
+			docs.push(	{ ...doc.data(), id: doc.id });
+			});
+			*/			
+		setwebCarts(querySnapshotUser);	
+		console.log(webCarts.length);	
 	}
 
 	useEffect(() => {
 		getCarts();
 	}, []);
-	const handleChoice = (cart) => {
+	const handleChoice = async(cart) => {
 		const newCarts = webCarts.filter(card => card.id != cart.id);
+		await deleteWebsite(cart.id,collection);
 		setwebCarts(newCarts);
+		getCarts();
 	}
 	const addNewCart = async() =>{		
 		const initialState = {
@@ -42,17 +44,21 @@ const Carts = () => {
 			total: 0,
 			totalQuantity:0,
 			userId:userId
-		  };
-		await saveWebsite(initialState);
+		};
+		await saveWebsite(initialState,collection);
+		getCarts();
 
 	}
 	const helper = (
 		<div className="helper">
 			<h2>You have no pending carts</h2>
+			<div className="title-carts">
+						<button onClick={addNewCart}> new cart</button>
+					</div>
 		</div>
 	);	
 	
-	if (webCarts.length != 0) {
+
 		return (
 			<div>
 				<div className="cart__container">
@@ -62,18 +68,16 @@ const Carts = () => {
 					<div className="title-carts">
 						<button onClick={addNewCart}> new cart</button>
 					</div>
-					<div className="card-grid">
+					<div className="card-grid">						
 						{
 							webCarts ?
-							webCarts.map(cart => (
-									
+							webCarts.map(cart => (																	
 								<WebsiteCard
 									key={cart.id}
 									cart={cart}
 									handleChoice={handleChoice}
-								/>
-								
-								
+									userId={userId}
+								/>																
 							))
 									
 								: <p>Loading....</p>
@@ -83,10 +87,7 @@ const Carts = () => {
 				</div>
 			</div>
 		);
-	} else {
-		return helper;
-
-	}
+	
 
 }
 

@@ -5,8 +5,7 @@ import { getAuth, signOut} from "firebase/auth";
 const Navigation =() => {
     const auth = getAuth();
     const user = auth.currentUser;
-    const navigate = useNavigate(); 
-    console.log(user);
+    const navigate = useNavigate();     
     const handleLogout = async () =>{
                
         const auth = getAuth();

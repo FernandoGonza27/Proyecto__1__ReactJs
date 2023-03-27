@@ -1,31 +1,59 @@
 import "./listProducts.scss"
+import { updateWebsite } from "../../../firebase/api";
 const List =({dataProducts,
+    cartId,
     cartProducts,
     setCartProducts,
 	total,
 	settotal,
     countProducts,
-    setCountProducts
+    setCountProducts,
+    userId
+    //agregar el parametro de id del cart para actualizar
 }) =>{
-
+    console.log(countProducts );
     
     
-    const onAddProduct = product => {                
+    const onAddProduct = product => {   
+        //arreglar las cantidades del producto al igaul que el guardado             
         if (cartProducts.find(item => item.id === product.id)) {
             const products = cartProducts.map(item =>
                 item.id === product.id
                     ? { ...item, quantity: item.quantity + 1 }
                     : item
             );
-            settotal(total + product.price *  product.quantity);
+            settotal(total + product.price *  product.quantity);        
             setCountProducts(countProducts + product.quantity);
+            console.log(countProducts+" "+ product.quantity)
+            console.log(countProducts + product.quantity)
+            console.log(countProducts);
+            saveProduct();
+            console.log("pass2")
             return setCartProducts([...products]);
+            
         }
 		settotal(total + product.price * product.quantity);
-		setCountProducts( product.quantity + countProducts );
-		setCartProducts([...cartProducts, product]);
+        console.log(countProducts+" "+ product.quantity)
+		setCountProducts(countProducts + product.quantity );        
+		setCartProducts([...cartProducts, product]);              
+        saveProduct();
+        console.log(countProducts);
+        console.log("pass1")
         
 	};
+    const saveProduct =async ()=>{
+        const collectionname1= "Carts";
+        ///Formar el objeto cart con los estados del cart                
+        const updatedcart = {
+            discount: 0,
+            products: cartProducts,
+            total: total,
+            totalQuantity:countProducts,
+            userId: userId
+        };
+        console.log(updatedcart);
+         await updateWebsite(collectionname1,cartId, updatedcart);
+    }
     return(
         <div className="grid-container">
             {dataProducts.map(product =>(

@@ -7,13 +7,15 @@ import { useEffect, useState } from "react";
 import { getWebsites } from "../../firebase/api";
 
 const Products = ({
+	cartId,
 	cartProducts,
 	setCartProducts,
 	total,
 	settotal,
 	handleCloseProducts,
 	countProducts,
-	setCountProducts
+	setCountProducts,
+	userId
 
 }) => {
 	const [data, setData] = useState(false);
@@ -46,12 +48,14 @@ const Products = ({
 
 				<div className="container__cart"  >
 					<Card
+						cartId={cartId}
 						cartProducts={cartProducts}
 						setCartProducts={setCartProducts}
 						total={total}
 						settotal={settotal}
 						countProducts={countProducts}
 						setCountProducts={setCountProducts}
+						userId={userId}
 					/>
 				</div>
 				<div className="container__list">
@@ -59,12 +63,14 @@ const Products = ({
 					{
 						data ? <List
 							dataProducts={data}
+							cartId={cartId}
 							cartProducts={cartProducts}
 							setCartProducts={setCartProducts}
 							total={total}
 							settotal={settotal}
 							countProducts={countProducts}
 							setCountProducts={setCartProducts}
+							userId={userId}
 						/> : <p>Loading.....</p>
 					}
 				</div>
