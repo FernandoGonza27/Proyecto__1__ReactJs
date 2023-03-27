@@ -1,6 +1,8 @@
 import "./listProducts.scss"
 import { updateWebsite } from "../../../firebase/api";
-const List =({dataProducts,
+import { useState,useEffect } from "react";
+import { getWebsites } from "../../../firebase/api";
+const List =({
     cartId,
     cartProducts,
     setCartProducts,
@@ -11,7 +13,22 @@ const List =({dataProducts,
     userId
     //agregar el parametro de id del cart para actualizar
 }) =>{
-    console.log(countProducts );
+    const [dataProducts, setDataProducts] = useState(false);
+	const getProducts =async () =>{
+		let collection ="Products"
+		const querySnapshot = await getWebsites(collection);
+		// onGetLinks((querySnapshot) => {
+		const docs = [];
+		querySnapshot.forEach((doc) => {
+		  docs.push({ ...doc.data(), id: doc.id });
+		});
+		setDataProducts(docs);
+
+	}
+
+	useEffect(() => {
+		getProducts();
+	}, []);
     
     
     const onAddProduct = product => {   
@@ -32,16 +49,28 @@ const List =({dataProducts,
             return setCartProducts([...products]);
             
         }
-		settotal(total + product.price * product.quantity);
-        console.log(countProducts+" "+ product.quantity)
+		settotal(total + product.price * product.quantity);        
 		setCountProducts(countProducts + product.quantity );        
 		setCartProducts([...cartProducts, product]);              
-        saveProduct();
+        saveFirstProduct();
         console.log(countProducts);
         console.log("pass1")
         
 	};
-    const saveProduct =async ()=>{
+    const saveProduct =async (firstTotal,firstProducts,firsCount)=>{
+        const collectionname1= "Carts";
+        ///Formar el objeto cart con los estados del cart                
+        const updatedcart = {
+            discount: 0,
+            products: cartProducts,
+            total: total,
+            totalQuantity:countProducts,
+            userId: userId
+        };
+        console.log(updatedcart);
+         await updateWebsite(collectionname1,cartId, updatedcart);
+    }
+    const saveFirstProduct =async (firstTotal,firstProducts,firsCount)=>{
         const collectionname1= "Carts";
         ///Formar el objeto cart con los estados del cart                
         const updatedcart = {
@@ -56,7 +85,8 @@ const List =({dataProducts,
     }
     return(
         <div className="grid-container">
-            {dataProducts.map(product =>(
+            {dataProducts ? 
+            dataProducts.map(product =>(
                 <div className="grid-item1" key={product.id}>
                     <figure>
                         <img src={product.image} alt={product.name}/>
@@ -69,7 +99,9 @@ const List =({dataProducts,
                         </button>
                     </div>
                 </div>
-            ))}
+            ))
+			: <p>Loading.....</p>}
+            
         </div>
     );
 

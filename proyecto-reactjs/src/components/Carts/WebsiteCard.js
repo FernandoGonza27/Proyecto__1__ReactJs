@@ -1,12 +1,12 @@
 
 import "./cardsStyle.scss"
 import { useState } from "react";
-import Products from "../productos/products";
+import List from "../productos/listProducts/listProducts";
+import Card from "../productos/cartProducts/cartProducts";
 
-    const WebsiteCard = ({cart,handleChoice,userId}) => {    
+const WebsiteCard = ({cart,handleChoice,userId}) => {    
     const [cartProducts, setCartProducts] = useState(cart.products);
-    const [total, settotal] = useState(cart.total)
-    const [id, setId] = useState(cart.id)
+    const [total, settotal] = useState(cart.total)    
     const [cartSelected, setcartSelected] =useState(false);
     const [countProducts, setCountProducts] = useState(3)
 
@@ -21,11 +21,11 @@ import Products from "../productos/products";
     const userCart =(
       <div
         className="card"
-        key={id}        
+        key={cart.id}        
       >
         <div className="card__body">
           <div className="card__title">
-            <h4>Id the Cart :{id}</h4>           
+            <h4>Id the Cart :{cart.id}</h4>           
             <button onClick={handleDelete}>X</button>
           </div>
           <p>Total of quantity is{countProducts}</p>    
@@ -40,21 +40,39 @@ import Products from "../productos/products";
         </div>
       </div>
     );
+
+    const viewDataCart=(
+      <div>
+        <button onClick={handleCloseProducts}>Close</button>
+        <section>
+          <Card
+              cartId={cart.id}
+              cartProducts={cartProducts}
+              setCartProducts={setCartProducts}
+              total={total}
+              settotal={settotal}
+              countProducts={countProducts}
+              setCountProducts={setCountProducts}
+              userId={userId}
+            />
+        </section>      
+        <section>
+          <List							
+                cartId={cart.id}
+                cartProducts={cartProducts}
+                setCartProducts={setCartProducts}
+                total={total}
+                settotal={settotal}
+                countProducts={countProducts}
+                setCountProducts={setCartProducts}
+                userId={userId}
+          />
+        </section>
+      </div>
+    );
     return (
       <>            
-      {
-					cartSelected ?  <Products
-           cartId={id}
-					 cartProducts={cartProducts}
-           setCartProducts={setCartProducts}
-           total={total}
-           settotal={settotal}
-					 handleCloseProducts={handleCloseProducts}
-           countProducts ={countProducts}
-           setCountProducts ={setCountProducts}
-           userId={userId}
-           />  : userCart
-				  }
+        {cartSelected ? viewDataCart  : userCart}
       </>
     );
 }
