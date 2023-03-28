@@ -2,14 +2,13 @@
  import { updateWebsite } from "../../../firebase/api";
  
  const Card = ({
-	cartId,
+	saveProduct,
     cartProducts,
     setCartProducts,
 	total,
 	settotal,
     countProducts,
-    setCountProducts,
-	userId
+    setCountProducts,	
  }) =>{
     const collectionname1= "Carts";
     const onDeleteProduct = product => {
@@ -20,38 +19,15 @@
 		settotal(total - product.price * product.quantity);
 		setCountProducts(countProducts - product.quantity);
 		setCartProducts(results);
-		saveProduct();
+		
 	};
 
     const onCleanCart = async()  => {
 		setCartProducts([]);
 		settotal(0);
 		setCountProducts(0)
-		const updatedcart = {
-            discount: 0,
-            products: [],
-            total: 0,
-            totalQuantity:0,
-            userId: userId
-        };
-		 console.log(updatedcart);
-         await updateWebsite(collectionname1,cartId, updatedcart);
+		/**/
 	};
-	const saveProduct =async ()=>{
-        
-        ///Formar el objeto cart con los estados del cart        
-        console.log("pass");
-        const updatedcart = {
-            discount: 0,
-            products: cartProducts,
-            total: total,
-            totalQuantity:countProducts,
-            userId: userId
-        };
-		 console.log(updatedcart);
-         await updateWebsite(collectionname1,cartId, updatedcart);
-    }
-	
     return(
         <>
             <div className="container-cart-products">

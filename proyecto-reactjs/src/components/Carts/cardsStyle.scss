@@ -32,6 +32,9 @@
         justify-content: space-between;
         
     }
+    &__close{
+        visibility: hidden;
+    }
 
     a{
         text-decoration: none;
@@ -78,10 +81,16 @@
     h2{
     align-items: center;
     }
+    &__close{
+        visibility: hidden;
+    }
 }
 
 .title-carts{
     background: transparent;
+    &__close{
+        visibility: hidden;
+    }
 }
 
 

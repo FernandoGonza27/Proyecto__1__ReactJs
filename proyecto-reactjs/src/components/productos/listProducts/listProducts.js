@@ -3,14 +3,13 @@ import { updateWebsite } from "../../../firebase/api";
 import { useState,useEffect } from "react";
 import { getWebsites } from "../../../firebase/api";
 const List =({
-    cartId,
+    saveProduct,
     cartProducts,
     setCartProducts,
 	total,
 	settotal,
     countProducts,
-    setCountProducts,
-    userId
+    setCountProducts,    
     //agregar el parametro de id del cart para actualizar
 }) =>{
     const [dataProducts, setDataProducts] = useState(false);
@@ -44,7 +43,7 @@ const List =({
             console.log(countProducts+" "+ product.quantity)
             console.log(countProducts + product.quantity)
             console.log(countProducts);
-            saveProduct();
+            //saveProduct();
             console.log("pass2")
             return setCartProducts([...products]);
             
@@ -52,12 +51,13 @@ const List =({
 		settotal(total + product.price * product.quantity);        
 		setCountProducts(countProducts + product.quantity );        
 		setCartProducts([...cartProducts, product]);              
-        saveFirstProduct();
+        //saveProduct();
         console.log(countProducts);
         console.log("pass1")
         
 	};
-    const saveProduct =async (firstTotal,firstProducts,firsCount)=>{
+    /*
+        const saveProduct =async ()=>{
         const collectionname1= "Carts";
         ///Formar el objeto cart con los estados del cart                
         const updatedcart = {
@@ -70,19 +70,8 @@ const List =({
         console.log(updatedcart);
          await updateWebsite(collectionname1,cartId, updatedcart);
     }
-    const saveFirstProduct =async (firstTotal,firstProducts,firsCount)=>{
-        const collectionname1= "Carts";
-        ///Formar el objeto cart con los estados del cart                
-        const updatedcart = {
-            discount: 0,
-            products: cartProducts,
-            total: total,
-            totalQuantity:countProducts,
-            userId: userId
-        };
-        console.log(updatedcart);
-         await updateWebsite(collectionname1,cartId, updatedcart);
-    }
+    */
+    
     return(
         <div className="grid-container">
             {dataProducts ? 

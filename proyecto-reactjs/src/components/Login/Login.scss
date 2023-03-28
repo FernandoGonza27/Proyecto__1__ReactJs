@@ -1,80 +1,78 @@
- 
-.login-container{    
+:root{ 
+    
+    --data-color-text: #F2F4F4; 
+    --data-color-primary: #0E1D22; 
+}  
+
+ html,body{    
+    margin:0;
+    display: flex;
+    
+ }
+.login__container{      
+    width:100vw;
+    height:100vh;       
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--data-color-primary);        
+
+  
+}
+
+.contain__login{
+    height: 250px;
+    width: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    gap: 20px;
-    height: 100vh;
-    background-image: url('../../imagenes/fondo2.jpg');
-    background-size: 100% 100%;
-    -moz-background-size: 100% 100%;
-    -o-background-size: 100% 100%;
-    -webkit-background-size: 100% 100%;
-    //background: linear-gradient(rgb(94, 94, 110), rgb(187, 28, 28));
-    color: white;
-}
-
-.login-content{
-    gap: 8px;
-    width: 20%;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    position: absolute;
-    padding: 2rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background: linear-gradient(rgb(9, 10, 82), rgb(248, 162, 2));
-    border-radius: 10px;
+    border-radius: 25px;
+    background-color: var(--data-color-text) ;
+    h2{
+        color: var(--data-color-primary);
+        font-size: 1.7rem;
+     }        
+    @media (min-width: 689px) {        
+        h2{
+            font-size: 2rem;
+         }
+    }
+    @media (min-width: 1280px) {        
+        h2{
+            font-size: 2.2rem;
+         }
+    }
 }
-
-.button-container{
+.button__container{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    padding: 1rem;
+    margin: 10px;
 }
 
-.submit-button{
-    width: 90%;
-    height: 40px;
-    border-radius: 25px;
-    border: none;
-    outline: none;
-    background: black;
-    color: White;
-    font-size: 14px;
+.submit__button{ 
+    display: inline-block;
+    background-color: var(--data-color-primary);
+    padding: 20px;
+    width: 100px;
+    color:var(--data-color-text);
+    font-size: 16px;
     font-weight: bold;
+    border-radius: 25px;
+    text-align: center;
+    text-decoration: none;
+    &:hover{
+        background-color: var(--data-color-text);
+        color: var(--data-color-primary);
+    }
+    @media (min-width: 689px) {        
+        width: 130px;
+    }
+    @media (min-width: 1280px) {        
+        width: 140px;
+    }
 }
 
-.submit-button:hover{
-    opacity: 0.6;
-    background-color: white;
-    color: black
-}
-
-.label-error{
-    font-size: 12px;
-    color: red;
-    background: pink;
-    width: fit-content;
-    height: fit-content;
-    padding: 0 5px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    margin-left: 10px;
-}
-
-.label-alert{
-    font-size: 12px;
-    color: red;
-    background: pink;
-    width: fit-content;
-    height: fit-content;
-    padding: 5px;
-    box-sizing: border-box;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
 

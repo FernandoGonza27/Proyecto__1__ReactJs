@@ -4,6 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from
 import { useNavigate } from 'react-router-dom';
 import AuthProvider from '../authprovider/authprovider';
 import { Link } from "react-router-dom";
+import './Login.scss'
 
 const auth = getAuth();
 const Login = () => {
@@ -92,15 +93,18 @@ const Login = () => {
     if ( state ==4){
         return (
             <>                            
-                <div>
-                    <Link
-                                 
-                    onClick={handleOnClik}
-
-                    >
-                    
-                    Login
-                    </Link>  
+                <div className='login__container'>
+                   <div className='contain__login' >
+                    <h2>Welcome</h2>
+                    <div className='button__container'>
+                        <Link 
+                            className='submit__button'                                
+                            onClick={handleOnClik}
+                            >                    
+                            Login
+                        </Link>  
+                    </div>
+                   </div>
                 </div>          
             </>            
         )

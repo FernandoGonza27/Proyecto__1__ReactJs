@@ -10,14 +10,13 @@ import { collection } from "firebase/firestore";
 const Carts = () => {
 	//const [data, setData] = useState(false);
 	const [webCarts, setwebCarts] = useState([]);	
+	const [state, setState] = useState("")	
 	const auth = getAuth();
     const userId = auth.currentUser.uid;//pasarlo como paramtro  y crear funcion para solo llemar una vez 
-	let collection ="Carts";
+	let collection ="Carts;"
 	const getCarts =async () =>{		
-		const querySnapshotUser = await getUserCarts(collection,userId);
-		
-		const querySnapshot = await getWebsites(collection);
-		
+		const querySnapshotUser = await getUserCarts(collection,userId);		
+		const querySnapshot = await getWebsites(collection);		
 			/* 	onGetLinks((querySnapshot) => {
 			const docs = [];
 			querySnapshot.forEach((doc) => {
@@ -54,27 +53,29 @@ const Carts = () => {
 			<h2>You have no pending carts</h2>
 			<div className="title-carts">
 						<button onClick={addNewCart}> new cart</button>
-					</div>
+			</div>
 		</div>
 	);	
 	
 
 		return (
 			<div>
-				<div className="cart__container">
-					<div className="title-carts">
-						<h2> Carts of User</h2>
+				<div className={"cart__container"}>
+					<div className={"title-carts"+state}>
+						<h1> Carts of User</h1>
 					</div>
-					<div className="title-carts">
+					<div className={"title-carts"+state}>
 						<button onClick={addNewCart}> new cart</button>
 					</div>
-					<div className="card-grid">						
+					<div className={"card-grid"+state}>						
 						{
 							webCarts ?
 							webCarts.map(cart => (																	
 								<WebsiteCard
 									key={cart.id}
-									cart={cart}
+									cart={cart}		
+									state={state}							
+									setState={setState}
 									handleChoice={handleChoice}
 									userId={userId}
 								/>																
