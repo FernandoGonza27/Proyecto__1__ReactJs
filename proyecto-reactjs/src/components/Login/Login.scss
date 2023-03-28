@@ -66,6 +66,8 @@
     &:hover{
         background-color: var(--data-color-text);
         color: var(--data-color-primary);
+        transform: scale(0.9);            
+        box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
     }
     @media (min-width: 689px) {        
         width: 130px;

@@ -2,8 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import WebsiteCard from "../components/Carts/WebsiteCard";
 import { getAuth} from "firebase/auth";
-import "../components/Carts/cardsStyle.scss";
 import { getWebsites, saveWebsite,getUserCarts,deleteWebsite } from "../firebase/api";
+import "./Carts/carts.scss"
 import { collection } from "firebase/firestore";
 
 
@@ -47,27 +47,19 @@ const Carts = () => {
 		await saveWebsite(initialState,collection);
 		getCarts();
 
-	}
-	const helper = (
-		<div className="helper">
-			<h2>You have no pending carts</h2>
-			<div className="title-carts">
-						<button onClick={addNewCart}> new cart</button>
-			</div>
-		</div>
-	);	
-	
-
+	}	
 		return (
 			<div>
 				<div className={"cart__container"}>
-					<div className={"title-carts"+state}>
-						<h1> Carts of User</h1>
+					<div className="cart__container__header">
+						<div className={"title-carts"+state}>
+							<h1> Carts of User</h1>
+						</div>
+						<div className={"cart__container__header__button"+state}>
+							<button onClick={addNewCart}> new cart</button>
+						</div>
 					</div>
-					<div className={"title-carts"+state}>
-						<button onClick={addNewCart}> new cart</button>
-					</div>
-					<div className={"card-grid"+state}>						
+					<div className={"wrapper__carts"+state}>						
 						{
 							webCarts ?
 							webCarts.map(cart => (																	
