@@ -9,6 +9,7 @@ import {
 import Error from './pages/error';
 //import Products from './components/products/products';
 import Carts from './pages/carts';
+import Products from './pages/products';
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,11 @@ const router = createBrowserRouter([
       {
         path:"/carts",
         element :<Carts/>
-      }
+      },
+      {
+        path:"/products",
+        element :<Products/>
+      },
     ]
   },
 ]);
