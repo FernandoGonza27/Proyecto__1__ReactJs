@@ -11,6 +11,7 @@ import {
   where
 } from "firebase/firestore";
 import { db } from "./config";
+import { getAuth, signOut} from "firebase/auth";
 
 //cambiar meterdo con parametro de compartible de base 
 export const saveWebsite = (newLink,collectionName) =>

@@ -76,14 +76,12 @@ const List =({
         <div className="grid-container">
             {dataProducts ? 
             dataProducts.map(product =>(
-                <div className="grid-item1" key={product.id}>
-                    <figure>
-                        <img src={product.image} alt={product.name}/>
-                    </figure>
-                    <div>
+                <div className="product" key={product.id}>                    
+                    <img src={product.image} alt={product.name}/>                    
+                    <div className="card__container">
                         <h2>{product.name}</h2>
                         <p>${product.price}</p>
-                        <button className='btn-clear-all' onClick={() => onAddProduct(product)} >
+                        <button className='btn__add__card' onClick={() => onAddProduct(product)} >
                             Add to de Cart
                         </button>
                     </div>

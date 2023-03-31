@@ -1,5 +1,5 @@
 
-import "./cardsStyle.scss"
+import "./WebsiteCard.scss"
 import { useState } from "react";
 import List from "../productos/listProducts/listProducts";
 import Card from "../productos/cartProducts/cartProducts";
@@ -35,28 +35,7 @@ const WebsiteCard = ({cart,state,setState,handleChoice,userId}) => {
        await updateWebsite(collectionname1,cart.id, updatedcart);
     }
 
-    const presentCart=(
-      <div class="ag-format-container">
-        <div class="ag-courses_box">
-            <div class="ag-courses_item">
-              <a href="#" class="ag-courses-item_link">
-                <div class="ag-courses-item_bg"></div>
-
-                <div class="ag-courses-item_title">
-                  UI/Web&amp;Graph design for teenagers 11-17&#160;years old
-                </div>
-
-                <div class="ag-courses-item_date-box">
-                  Start:
-                  <span class="ag-courses-item_date">
-                    04.11.2022
-                  </span>
-                </div>
-              </a>
-            </div>
-        </div>
-      </div>
-    );
+    
 
     const userCart =(
       <div
@@ -69,23 +48,25 @@ const WebsiteCard = ({cart,state,setState,handleChoice,userId}) => {
             <h4>Id the Cart :{cart.id}</h4>           
             <button onClick={handleDelete}>X</button>
           </div>
-          <p>Total of quantity is{countProducts}</p>    
-          <p>Total payable is ${total}</p>          
-          <a               
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={handleChoiceProducts}
-          >
-            Go to the products
-          </a>
+          <div>
+            <p>Total of quantity is{countProducts}</p>    
+            <p>Total payable is ${total}</p>          
+            <a               
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={handleChoiceProducts}
+            >
+              Go to the products
+            </a>
+          </div>
         </div>
       </div>
     );
 
     const viewDataCart=(
-      <div>
-        <button onClick={handleCloseProducts}>Close</button>
-        <section>
+      <div className="box__container">        
+        <div className="box__container____children">        
+          <button className="box__container__button" onClick={handleCloseProducts}>Close</button>        
           <Card
               saveProduct={saveProduct}
               cartProducts={cartProducts}
@@ -96,8 +77,7 @@ const WebsiteCard = ({cart,state,setState,handleChoice,userId}) => {
               setCountProducts={setCountProducts}
               userId={userId}
             />
-        </section>      
-        <section>
+        </div>              
           <List							
                 saveProduct={saveProduct}
                 cartProducts={cartProducts}
@@ -107,8 +87,7 @@ const WebsiteCard = ({cart,state,setState,handleChoice,userId}) => {
                 countProducts={countProducts}
                 setCountProducts={setCountProducts}
                 userId={userId}
-          />
-        </section>
+          />        
       </div>
     );
     return (

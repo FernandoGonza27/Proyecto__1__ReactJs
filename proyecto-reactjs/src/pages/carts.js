@@ -49,7 +49,7 @@ const Carts = () => {
 
 	}	
 		return (
-			<div>
+			<div className="container">
 				<div className={"cart__container"}>
 					<div className="cart__container__header">
 						<div className={"title-carts"+state}>

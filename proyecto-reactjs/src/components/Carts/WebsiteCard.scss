@@ -1,0 +1,94 @@
+
+ @import url('https://fonts.googleapis.com/css2?family=Francois+One&display=swap');
+
+:root{ 
+    
+    --data-color-secondary: #FFC300; 
+    --data-color-primary: #0E1D22; 
+}   
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);  
+    transition: 0.3s;
+    position: relative;        
+    display: block;
+    
+      
+    font-family: 'Francois One', 'sans-serif';
+    margin: 2rem;
+    
+
+    &__body{
+        padding: 2px 16px;
+        background-color: var(--data-color-primary);
+        border-radius: 26px;   
+        :hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }   
+    }
+    &__title{
+        align-items: center;
+        font-size: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        
+    }
+    &__close{
+        visibility: hidden;
+    }
+
+    a{
+        text-decoration: none;
+        color: var(--data-color-secondary);
+
+    }
+
+   
+    
+}
+
+.title-carts{
+    background: transparent;
+    &__close{
+        visibility: hidden;
+    }
+}
+
+.box__container{margin: 1em auto; 
+    display: block; 
+    position: relative;
+    background: #ccc; 
+    text-align: center; 
+    text-decoration: none; 
+    color: black; 
+    padding: 10px; 
+    text-shadow: 0 1px 0 #fff; 
+    border: 1px solid rgba(0,0,0,0.2); 
+    box-shadow: 0 10px 10px rgba(0,0,0,0.4); 
+   
+    @media (min-width: 698px) {        
+        display: flex;
+        
+    }
+    &__button{
+        width: 100px;
+        height: 50px;
+        background-color: aqua;
+        
+        button{
+            padding: 10px 25px;
+            background-color: #FFC300;
+            border-radius: 15px;
+            display: inline-block;
+            &:hover{
+                    transform: scale(0.9);            
+                    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+            }
+        }
+    }
+    &__children{
+       display: flex;
+       flex-direction: row;
+           
+    }
+}
+
