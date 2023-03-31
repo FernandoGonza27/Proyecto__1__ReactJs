@@ -3,9 +3,8 @@ import "./navigation.scss"
 import { getAuth, signOut} from "firebase/auth";
 
 const Navigation =() => {
-    const auth = getAuth();
-    const user = auth.currentUser;
     const navigate = useNavigate();     
+    const user = JSON.parse(localStorage.getItem("usuario"));
     const handleLogout = async () =>{
                
         const auth = getAuth();

@@ -11,11 +11,10 @@ const Carts = () => {
 	//const [data, setData] = useState(false);
 	const [webCarts, setwebCarts] = useState([]);	
 	const [state, setState] = useState("")	
-	const auth = getAuth();
-    const userId = auth.currentUser.uid;//pasarlo como paramtro  y crear funcion para solo llemar una vez 
+	const user = JSON.parse(localStorage.getItem("usuario"));
 	let collection ="Carts;"
 	const getCarts =async () =>{		
-		const querySnapshotUser = await getUserCarts(collection,userId);		
+		const querySnapshotUser = await getUserCarts(collection,user.uid);		
 		const querySnapshot = await getWebsites(collection);		
 			/* 	onGetLinks((querySnapshot) => {
 			const docs = [];
@@ -42,7 +41,7 @@ const Carts = () => {
 			products: [],
 			total: 0,
 			totalQuantity:0,
-			userId:userId
+			userId:user.uid
 		};
 		await saveWebsite(initialState,collection);
 		getCarts();
@@ -69,7 +68,7 @@ const Carts = () => {
 									state={state}							
 									setState={setState}
 									handleChoice={handleChoice}
-									userId={userId}
+									userId={user.uid}
 								/>																
 							))
 									

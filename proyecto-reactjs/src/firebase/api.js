@@ -13,6 +13,12 @@ import {
 import { db } from "./config";
 import { getAuth, signOut} from "firebase/auth";
 
+export const loadUser = (user) =>{ 
+  console.log("save successful");     
+  localStorage.setItem("usuario", JSON.stringify(user));
+
+}
+
 //cambiar meterdo con parametro de compartible de base 
 export const saveWebsite = (newLink,collectionName) =>
   addDoc(collection(db, collectionName), newLink);

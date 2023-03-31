@@ -4,6 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from
 import { useNavigate } from 'react-router-dom';
 import AuthProvider from '../authprovider/authprovider';
 import { Link } from "react-router-dom";
+import { loadUser } from '../../firebase/api';
 import './Login.scss'
 
 const auth = getAuth();
@@ -80,6 +81,7 @@ const Login = () => {
     }
 
     const handleUserLoggedIn = (user) => {
+       loadUser(user);
        navigate('/carts'); 
        console.log(user.accessToken);
     }
