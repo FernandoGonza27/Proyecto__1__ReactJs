@@ -44,6 +44,10 @@ const Products = () => {
     const addNewProduct = async () => {
         await saveWebsite(product, collection);
     }
+    useEffect(() => {
+      getProducts;
+    }, [])
+    
 
     const Modal = (
         <div id="myModal" className="modal">
@@ -76,22 +80,26 @@ const Products = () => {
         </div>
     );
 
-    return (
-        <div>
-            <h1>Mis productos</h1>
-            <button onClick={handleModal}>Agregar producto</button>
-            <ul>
-                {webProducts.map((product) => (
-                    <li key={product.id}>
-                        {product.name} ({product.price})
+    return(
+        <div className="grid-container">
+            <h1>Mis Productos</h1>
+            {webProducts ? 
+            webProducts.map(product =>(
+                <div className="product" key={product.id}>                    
+                    <img src={product.image} alt={product.name}/>                    
+                    <div className="card__container">
+                        <h2>{product.name}</h2>
+                        <p>${product.price}</p>
                         <button onClick={() => onDeleteProduct(product)}>Eliminar</button>
                         <button onClick={() => updateProduct(product)}>Editar</button>
-                    </li>
-                ))}
-            </ul>
-            {OpenMoadal && Modal}
+                    </div>
+                </div>
+            ))
+			: <p>Loading.....</p>}
+            
         </div>
     );
+
 }
 
 export default Products;

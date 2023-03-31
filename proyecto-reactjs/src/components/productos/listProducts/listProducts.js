@@ -21,6 +21,7 @@ const List =({
 		querySnapshot.forEach((doc) => {
 		  docs.push({ ...doc.data(), id: doc.id });
 		});
+        localStorage.setItem('products', JSON.stringify(docs));
 		setDataProducts(docs);
 
 	}
