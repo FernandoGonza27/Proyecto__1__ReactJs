@@ -65,8 +65,22 @@ const WebsiteCard = ({cart,state,setState,handleChoice,userId}) => {
 
     const viewDataCart=(
       <div className="box__container">        
-        <div className="box__container____children">        
-          <button className="box__container__button" onClick={handleCloseProducts}>Close</button>        
+        <div className="box__container____children"> 
+          <svg
+											xmlns='http://www.w3.org/2000/svg'
+											fill='none'
+											viewBox='0 0 24 24'
+											strokeWidth='1.5'
+											stroke='currentColor'
+											className='box__container__button'
+                      onClick={handleCloseProducts}
+										>
+											<path
+												strokeLinecap='round'
+												strokeLinejoin='round'
+												d='M6 18L18 6M6 6l12 12'
+											/>
+					</svg>                        
           <Card
               saveProduct={saveProduct}
               cartProducts={cartProducts}

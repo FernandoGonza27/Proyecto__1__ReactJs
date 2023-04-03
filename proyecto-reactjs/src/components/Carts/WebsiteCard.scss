@@ -21,6 +21,7 @@
         padding: 2px 16px;
         background-color: var(--data-color-primary);
         border-radius: 26px;   
+        color: #ccc;
         :hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         }   
@@ -54,35 +55,40 @@
 }
 
 .box__container{margin: 1em auto; 
-    display: block; 
-    position: relative;
-    background: #ccc; 
-    text-align: center; 
-    text-decoration: none; 
+    overflow-y: scroll;
+    display: block;    
+    position: absolute;
+    
+    display: block;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 70%; /* Full width */
+    height: auto; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    text-align: center;     
     color: black; 
-    padding: 10px; 
+    padding: 20px; 
     text-shadow: 0 1px 0 #fff; 
     border: 1px solid rgba(0,0,0,0.2); 
     box-shadow: 0 10px 10px rgba(0,0,0,0.4);     
     @media (min-width: 698px) {        
         display: flex;
+        width: 90%;
         
     }
-    &__button{
-        width: 100px;
-        height: 50px;
-        background-color: aqua;
-        
-        button{
-            padding: 10px 25px;
-            background-color: #FFC300;
-            border-radius: 15px;
-            display: inline-block;
-            &:hover{
-                    transform: scale(0.9);            
-                    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-            }
-        }
+    &__button{        
+        width: 25px;
+        height: 25px;
+                    
+        display: flex;
+        margin-left: 20px;        
+        border-radius: 5px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);	    
+        &:hover{
+            stroke: red;
+            cursor: pointer;
+        }  
     }
     &__children{
        display: flex;
