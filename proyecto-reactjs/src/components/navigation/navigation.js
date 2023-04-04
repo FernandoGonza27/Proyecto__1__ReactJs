@@ -15,6 +15,10 @@ const Navigation =() => {
           // An error happened.
         });     
     }    
+    const handleProducts = async () =>{
+        navigate('/products');  
+        
+    }  
     return(
         <div className="navigation">
             <div className="navigation__logo">
@@ -29,6 +33,10 @@ const Navigation =() => {
             <div className="logout">
                 <div className="logout__close">
                     <button onClick={handleLogout} >Logout</button></div>                
+            </div>
+            <div className="logout">
+                <div className="logout__close">
+                    <button onClick={handleProducts} >Products</button></div>                
             </div>
         </div>
     );
