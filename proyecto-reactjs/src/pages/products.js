@@ -87,7 +87,7 @@ const Products = () => {
                             <label htmlFor="price">Precio:</label>
                             <input type="number" id="price" name="price" value={product.price} onChange={handleInputChange} required min="0" step="5" />
                             <label htmlFor="quantity">Cantidad:</label>
-                            <input type="number" id="quantity" name="quantity" value={product.quantity} onChange={handleInputChange} required min="0" step="5" />
+                            <input type="number" id="quantity" name="quantity" value={product.quantity} onChange={handleInputChange} />
                         </fieldset>
                         <fieldset>
                             <legend>Otros Detalles</legend>
@@ -110,9 +110,8 @@ const Products = () => {
 
     return (
         <div className="grid-container">
-
-            <h1>Mis Productos</h1>
             <div className="Modal">
+                <h1>Mis Productos</h1>
                 <button className="buttonADD" onClick={handleAddProduct}>Add new product</button>
             </div>
             {webProducts ?
