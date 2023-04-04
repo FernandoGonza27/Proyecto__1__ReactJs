@@ -19,10 +19,9 @@ const Navigation =() => {
 
     return(
         <div className="navigation">
-            <div className="navigation__logo">
-                <img src={"/img/logo__app2.png"}/>
-            </div>
+            
             <div className="navigation__menu">
+                <img src={"/img/logo__app2.png"}/>
                 <ul>
                     <li>Welcome {user.displayName}</li>
                 
