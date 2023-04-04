@@ -1,7 +1,6 @@
 import { async } from "@firebase/util";
 import { useEffect, useState } from "react";
 import { saveWebsite, updateWebsite, deleteWebsite, getWebsites } from './../firebase/api';
-import AddProductModal from "./modal";
 import "./Carts/product.scss"
 
 const initialState = {
@@ -50,13 +49,14 @@ const Products = () => {
     const updateProduct = async (updatedProduct, productId) => {
         ///Formar el objeto cart con los estados del cart        
         console.log(updatedProduct);
+        handleAddProduct();
         await updateWebsite(collection, productId);
     }
-    const addNewProduct = async () => {
+    /*const addNewProduct = async () => {
         await saveWebsite(product, collection);
-    }
+    }*/
     useEffect(() => {
-      getProducts();
+        getProducts();
     }, [])
 
     const handleSubmit = (event) => {
@@ -78,16 +78,16 @@ const Products = () => {
         return (
             <div className="modal">
                 <div className="modal__content">
-                    <h2>Agregar Nuevo Producto</h2>
+                    <h2>Add new product</h2>
                     <form onSubmit={handleSubmit}>
                         <fieldset>
                             <legend>Detalles del Producto</legend>
                             <label htmlFor="name">Nombre:</label>
                             <input type="text" id="name" name="name" value={product.name} onChange={handleInputChange} required maxLength="50" />
                             <label htmlFor="price">Precio:</label>
-                            <input type="number" id="price" name="price" value={product.price} onChange={handleInputChange} required min="0" step="0.01" />
+                            <input type="number" id="price" name="price" value={product.price} onChange={handleInputChange} required min="0" step="5" />
                             <label htmlFor="quantity">Cantidad:</label>
-                            <input type="number" id="quantity" name="quantity" value={product.quantity} onChange={handleInputChange} required min="0" step="1" />
+                            <input type="number" id="quantity" name="quantity" value={product.quantity} onChange={handleInputChange} required min="0" step="5" />
                         </fieldset>
                         <fieldset>
                             <legend>Otros Detalles</legend>
@@ -97,8 +97,9 @@ const Products = () => {
                             <input type="text" id="color" name="color" value={product.color} onChange={handleInputChange} maxLength="20" />
                         </fieldset>
                         <div className="modal__buttons">
-                            <button className="button button--primary" type="submit">Guardar</button>
+                            <button className="button button--primary" onClick={getProducts} type="submit">Guardar</button>
                             <button className="button" type="button" onClick={handleModal}>Cancelar</button>
+
                         </div>
                     </form>
                 </div>
