@@ -3,24 +3,32 @@
 .navigation{
     font-family: 'Francois One', 'sans-serif';
     display: flex;
-    width: auto;
-    height: 5rem;
-    padding: 0 1rem;
-    background-color:   #000000 ;
+    flex-direction: column;
     
-    &__logo{
-        
-        img{
-            padding-top: 0rem;
-            height: 95%;
-            width: 90%;
-        }
-       
+    background-color:   #000000 ;
+    @media (min-width: 698px) {        
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: 5rem;
+        padding: 0 1rem;
     }
+
     
     &__menu{
         display: flex;
+        justify-content: space-between;
         align-items: center;
+        img{
+            height: 155%;
+            width: 15%;
+            @media (min-width: 698px) {        
+                padding-top: 0rem;
+                height: 90%;
+                width: 80%;
+            }
+        }
+       
         ul {
             list-style-type: none;
             display: flex;
@@ -30,7 +38,7 @@
 
         li{
             color: #ffffff;
-            padding: 0 1rem;
+            padding: 0 3rem;
             font-size: 1.25rem;
         }
         a{
@@ -48,10 +56,14 @@
 .logout{
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
     width: 100%;
-    height: 6rem;
-    padding: 0 2rem;
+   
+    @media (min-width: 698px) {        
+       justify-content: end;
+    }    
+   
+    
     background-color:   #000000 ;
     &__close{
         display: flex;
