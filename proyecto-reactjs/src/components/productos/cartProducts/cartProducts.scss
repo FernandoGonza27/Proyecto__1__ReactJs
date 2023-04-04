@@ -46,7 +46,7 @@ header {
 
 .container-cart-products {
 	
-	background-color: red;
+	
 	top: 50px;
 	right: 0;	
 	width: 70%;
@@ -95,12 +95,13 @@ header {
 .icon-close {
 	width: 25px;
 	height: 25px;
+	&:hover{
+		stroke: red;
+		cursor: pointer;
+	}
 }
 
-.icon-close:hover {
-	stroke: red;
-	cursor: pointer;
-}
+
 
 .cart-total {
 	display: flex;

@@ -1,7 +1,10 @@
 
 .grid-container {  
-    display: flex;
-    flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-area: auto;
+  
+  
     
     @media (min-width: 689px) {        
       display: grid;
@@ -15,16 +18,19 @@
   }
   
   .product {
-
-    padding:2.2rem ;    
-    margin:10px;
+    height: 270px;
+    
+    margin: 35px 10px 29px 10px;
     width: 150px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-
+    img{
+      width: 100%;
+      height: 55%;
+    }
     &__container{
-      display: block;
+      display: flex;
       align-items: center;
       justify-content: center;
       

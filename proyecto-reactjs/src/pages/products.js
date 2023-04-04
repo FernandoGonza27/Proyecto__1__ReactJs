@@ -45,6 +45,7 @@ const Products = () => {
 
     const onDeleteProduct = async (product) => {
         await deleteWebsite(product.id, collection);
+        getProducts();
     }
     const updateProduct = async (updatedProduct, productId) => {
         ///Formar el objeto cart con los estados del cart        
@@ -55,7 +56,7 @@ const Products = () => {
         await saveWebsite(product, collection);
     }
     useEffect(() => {
-        getProducts();
+      getProducts();
     }, [])
 
     const handleSubmit = (event) => {
