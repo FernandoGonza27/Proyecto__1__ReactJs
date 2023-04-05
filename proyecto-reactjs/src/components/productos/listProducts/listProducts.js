@@ -51,22 +51,7 @@ const List =({
         
         
 	};
-    /*
-        const saveProduct =async ()=>{
-        const collectionname1= "Carts";
-        ///Formar el objeto cart con los estados del cart                
-        const updatedcart = {
-            discount: 0,
-            products: cartProducts,
-            total: total,
-            totalQuantity:countProducts,
-            userId: userId
-        };
-        console.log(updatedcart);
-         await updateWebsite(collectionname1,cartId, updatedcart);
-    }
-    */
-    
+
     return(
         <div className="grid-container">
             {dataProducts ? 
