@@ -40,21 +40,15 @@ const List =({
                     : item
             );
             settotal(total + product.price *  product.quantity);        
-            setCountProducts(countProducts + product.quantity);
-            console.log(countProducts+" "+ product.quantity)
-            console.log(countProducts + product.quantity)
-            console.log(countProducts);
-            //saveProduct();
-            console.log("pass2")
+            setCountProducts(countProducts + product.quantity);            
             return setCartProducts([...products]);
             
         }
 		settotal(total + product.price * product.quantity);        
 		setCountProducts(countProducts + product.quantity );        
-		setCartProducts([...cartProducts, product]);              
-        //saveProduct();
+		setCartProducts([...cartProducts, product]);                      
         console.log(countProducts);
-        console.log("pass1")
+        
         
 	};
     /*

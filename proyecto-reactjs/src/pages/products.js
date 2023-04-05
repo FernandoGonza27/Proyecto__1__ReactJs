@@ -13,8 +13,9 @@ const initialState = {
 
 
 const Products = () => {
+    const [productIdEdit, setproductIdEdit] = useState("")
     const [product, setProduct] = useState(initialState);
-    const [productEdict, setProductEdict] = useState({});
+    const [productEdict, setProductEdict] = useState(initialState);
     const [webProducts, setwebProducts] = useState([]);
     const collection = "Products";
     const [showModal, setShowModal] = useState(false);
@@ -35,8 +36,9 @@ const Products = () => {
     const handleInputChange = ({ target: { name, value } }) =>
         setProduct({ ...product, [name]: value });
      
+
     const handleInputChangeEdit = ({ target: { name, value } }) =>
-        setProduct({ ...productEdict, [name]: value });
+        setProductEdict({ ...productEdict, [name]: value });
 
     const getProducts = async () => {
         const querySnapshot = await getWebsites(collection);
@@ -51,23 +53,32 @@ const Products = () => {
         await deleteWebsite(product.id, collection);
         getProducts();
     }
-    const updateProduct = async (updatedProduct, product) => {
+    const updateProduct = async () => {
         ///Formar el objeto cart con los estados del cart        
-        console.log(updatedProduct);
-        handleAddProduct();
-        await updateWebsite(collection, product.id);
+        console.log(productEdict);        
+        await updateWebsite(collection,productIdEdit,productEdict);
+        getProducts();
+        
     }
 
     useEffect(() => {
         getProducts();
     }, [])
 
+    const handleSubmitEdit = (event) => {
+        event.preventDefault();                
+        
+        updateProduct();
+        setShowModalEdit(!showModalEdit)
+        
+    };
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
             handleSaveProduct();
         }
     };
+
 
     const validateForm = () => {
         const { name, price} = product;
@@ -79,9 +90,11 @@ const Products = () => {
     };
 
     const editProduct =(product) =>{ 
-        console.log(1);
+        console.log(product);
         setShowModalEdit(!showModalEdit);
         setProductEdict(product);
+        setproductIdEdit(product.id);
+        
     }
     const Modal = () => {
         return (
@@ -118,7 +131,7 @@ const Products = () => {
             <div className="modal">
                 <div className="modal__content">
                     <h2>Edit product</h2>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmitEdit}>
                         <fieldset>
                             <legend>Detalles del Producto</legend>
                             <label htmlFor="name">Nombre:</label>
