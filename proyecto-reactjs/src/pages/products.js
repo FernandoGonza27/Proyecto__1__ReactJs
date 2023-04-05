@@ -8,16 +8,17 @@ const initialState = {
     image: "",
     name: "",
     price: 0,
-    quantity: 0
+    quantity: 1
 };
 
 
 const Products = () => {
     const [product, setProduct] = useState(initialState);
+    const [productEdict, setProductEdict] = useState({});
     const [webProducts, setwebProducts] = useState([]);
     const collection = "Products";
     const [showModal, setShowModal] = useState(false);
-
+    const [showModalEdit, setShowModalEdit] = useState(false);
     const handleAddProduct = () => {
         setShowModal(true);
     };
@@ -25,6 +26,7 @@ const Products = () => {
     const handleSaveProduct = async () => {
         await saveWebsite(product, collection);
         setShowModal(false);
+        getProducts();
     };
     const handleModal = () => {
         setShowModal(!showModal);
@@ -32,6 +34,9 @@ const Products = () => {
 
     const handleInputChange = ({ target: { name, value } }) =>
         setProduct({ ...product, [name]: value });
+     
+    const handleInputChangeEdit = ({ target: { name, value } }) =>
+        setProduct({ ...productEdict, [name]: value });
 
     const getProducts = async () => {
         const querySnapshot = await getWebsites(collection);
@@ -46,15 +51,13 @@ const Products = () => {
         await deleteWebsite(product.id, collection);
         getProducts();
     }
-    const updateProduct = async (updatedProduct, productId) => {
+    const updateProduct = async (updatedProduct, product) => {
         ///Formar el objeto cart con los estados del cart        
         console.log(updatedProduct);
         handleAddProduct();
-        await updateWebsite(collection, productId);
+        await updateWebsite(collection, product.id);
     }
-    /*const addNewProduct = async () => {
-        await saveWebsite(product, collection);
-    }*/
+
     useEffect(() => {
         getProducts();
     }, [])
@@ -67,13 +70,19 @@ const Products = () => {
     };
 
     const validateForm = () => {
-        const { name, price, quantity } = product;
-        if (!name || !price || !quantity) {
+        const { name, price} = product;
+        if (!name || !price ) {
             alert('Por favor complete todos los campos obligatorios.');
             return false;
         }
         return true;
     };
+
+    const editProduct =(product) =>{ 
+        console.log(1);
+        setShowModalEdit(!showModalEdit);
+        setProductEdict(product);
+    }
     const Modal = () => {
         return (
             <div className="modal">
@@ -85,9 +94,7 @@ const Products = () => {
                             <label htmlFor="name">Nombre:</label>
                             <input type="text" id="name" name="name" value={product.name} onChange={handleInputChange} required maxLength="50" />
                             <label htmlFor="price">Precio:</label>
-                            <input type="number" id="price" name="price" value={product.price} onChange={handleInputChange} required min="0" step="5" />
-                            <label htmlFor="quantity">Cantidad:</label>
-                            <input type="number" id="quantity" name="quantity" value={product.quantity} onChange={handleInputChange} />
+                            <input type="number" id="price" name="price" value={product.price} onChange={handleInputChange} required min="0" step="5" />                            
                         </fieldset>
                         <fieldset>
                             <legend>Otros Detalles</legend>
@@ -97,8 +104,38 @@ const Products = () => {
                             <input type="text" id="color" name="color" value={product.color} onChange={handleInputChange} maxLength="20" />
                         </fieldset>
                         <div className="modal__buttons">
-                            <button className="button button--primary" onClick={getProducts} type="submit">Guardar</button>
+                            <button className="button button--primary"  type="submit">Guardar</button>
                             <button className="button" type="button" onClick={handleModal}>Cancelar</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        );
+    };
+    const ModalEdit = () => {        
+        return (
+            <div className="modal">
+                <div className="modal__content">
+                    <h2>Edit product</h2>
+                    <form onSubmit={handleSubmit}>
+                        <fieldset>
+                            <legend>Detalles del Producto</legend>
+                            <label htmlFor="name">Nombre:</label>
+                            <input type="text" id="name" name="name" value={productEdict.name} onChange={handleInputChangeEdit}  />
+                            <label htmlFor="price">Precio:</label>
+                            <input type="number" id="price" name="price" value={productEdict.price} onChange={handleInputChangeEdit} />                            
+                        </fieldset>
+                        <fieldset>
+                            <legend>Otros Detalles</legend>
+                            <label htmlFor="image">Imagen:</label>
+                            <input type="text" id="image" name="image" value={productEdict.image} onChange={handleInputChangeEdit} />
+                            <label htmlFor="color">Color:</label>
+                            <input type="text" id="color" name="color" value={productEdict.color} onChange={handleInputChangeEdit}/>
+                        </fieldset>
+                        <div className="modal__buttons">
+                            <button className="button button--primary"  type="submit">Guardar</button>
+                            <button className="button" type="button" onClick={() => setShowModalEdit(!showModalEdit)}>Cancelar</button>
 
                         </div>
                     </form>
@@ -123,13 +160,14 @@ const Products = () => {
                             <h2>{product.name}</h2>
                             <p>${product.price}</p>
                             <button className="button" onClick={() => onDeleteProduct(product)}>Delete</button>
-                            <button className="button" onClick={() => updateProduct(product)}>Edit</button>
+                            <button className="button"  onClick={() => editProduct(product)} >Edit</button>
                         </div>
 
                     </div>
                 ))
                 : <p>Loading.....</p>}
             {showModal && <Modal />}
+            {showModalEdit && <ModalEdit/>}
         </div>
         </div>
         
