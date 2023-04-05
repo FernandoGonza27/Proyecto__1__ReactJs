@@ -109,11 +109,12 @@ const Products = () => {
 
 
     return (
-        <div className="grid-container">
-            <div className="Modal">
+        <div className="container">
+            <div className="header_products">                
                 <h1>Mis Productos</h1>
                 <button className="buttonADD" onClick={handleAddProduct}>Add new product</button>
             </div>
+            <div className="container__grid__products">            
             {webProducts ?
                 webProducts.map(product => (
                     <div className="product" key={product.id}>
@@ -130,6 +131,8 @@ const Products = () => {
                 : <p>Loading.....</p>}
             {showModal && <Modal />}
         </div>
+        </div>
+        
     );
 
 }
